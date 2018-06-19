@@ -1,0 +1,21 @@
+<table class="general wide left_auto right_auto"><tr><td></td></tr>
+    {% if data["prev_page"] %}
+        <tr>
+            <td>
+                <button class="general menu wide smallfont dimmed messages" onclick="show_message_page('{{ data['prev_page']-1 }}')">^</button>
+            </td>
+        </tr>
+    {% endif %}
+    {% for message in data["messages"] %}
+    <tr><td><button class="general menu wide smallfont dimmed messages" onclick="show_message('{{ message['id'] }}')">
+    {{ message['id'] }}&nbsp;&nbsp;&nbsp;&nbsp;{{ message['date'] }}
+     | <strong>{{ message['from'] }}</strong></button></td></tr>
+    {% endfor %}
+    {% if data["next_page"] %}
+        <tr>
+            <td>
+                <button class="general menu wide smallfont dimmed messages" onclick="show_message_page('{{ data['next_page'] }}')">\/</button>
+            </td>
+        </tr>
+    {% endif %}
+</table>

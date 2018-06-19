@@ -1,0 +1,12 @@
+<div  class="wide__ left_auto right_auto mediumfont">
+<table class="general wide center top_5 left_auto right_auto" style="height:85%;">
+<tr><td class="actions dimmed general mediumfont border">
+	<input id="setpoint" type="range" style="width:90%;margin-top: 8%; margin-bottom: 8%;" class="actions dimmed general mediumfont slider" min="{{ data['setpoint'][0] }}" max="{{ data['setpoint'][1] }}" value="{{ data['state'] }}"
+    onchange="item_slider_action('{{ data['id'] }}', '{{ data['setpoint'][2] }}', '{{ data['setpoint'][0] }}', '{{ data['setpoint'][1] }}', 'OK')"></input>
+</td></tr>
+<!--<tr><td style="margin-top: 10%;">
+	<button style="height:90%;width:100%;" class="actions dimmed general mediumfont" onclick="item_slider_action('{{ data['name'] }}', '{{ data['setpoint'][2] }}', '{{ data['setpoint'][0] }}', '{{ data['setpoint'][1] }}', 'OK')">
+     OK </button>
+</td></tr>-->
+<tr><td><button style="height:100%;width:50%;" class="actions dimmed general mediumfont" onclick="closesmallpopup()"> Close </button></td></tr>
+</table></div>

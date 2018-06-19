@@ -1,0 +1,8 @@
+<div  class="wide__ left_10 mediumfont">
+<table class="general wide center top_5" style="height:85%;">
+{% for d in data["periods"] %}
+<tr><td><button style="height:90%;width:100%;" class="actions dimmed submenu general mediumfont" onclick="update_chart('{{ data['name'] }}', '{{ d[1] }}')"> {{ d[0] }} </button>
+</td></tr>
+{% endfor %}
+<tr><td><button style="height:100%;width:35%;" class="submenu dimmed general mediumfont" onclick="closepopup()"> Close </button></td></tr>
+</table></div>

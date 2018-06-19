@@ -1,0 +1,10 @@
+<div class="wide__ left_10 xsmallfont">
+<h1>{{ data["subject"] }}</h1>
+<p><i>from: {{ data["from"] }}</i></p>
+<p><i>received: {{ data["date"] }}</i></p>
+<p>{{ data["message"] }}</p>
+</div>
+<div class="right wide__ bottomxtra text_center">
+    <button style="height:100%;width:35%;" class="general smallfont dimmed" onclick="delete_message('{{ data["id"] }}')">delete</button>
+    &nbsp;<button style="height:100%;width:35%;" class="general smallfont dimmed" onclick="delete_message('all')">delete all</button></div>
+</div>

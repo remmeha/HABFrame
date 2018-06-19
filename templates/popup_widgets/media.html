@@ -1,0 +1,160 @@
+<!-- widget
+    Name=media/
+-->
+
+<div class="xxxwide high">
+<table class="text_center fixed xxxwide smallfont right_auto left_auto high">
+    <tr style="height: 5%;">
+        <td class="largefont">
+            Media
+        </td>
+    </tr>
+    <tr style="height: 95%;">
+        <td class="largefont">
+        <table class="text_center fixed xxxwide smallfont right_auto left_auto high">
+        <tr>
+            <td style="width: 50%;">
+                <table class="xsmallfont left_auto right_auto high xxxwide">
+                <tr style="height: 55%;"><td style="width: 100%;">
+                    <table class="xsmallfont left_auto right_auto high xxxwide">
+                    <tr><td style="width: 100%;">
+                        
+                        <table style="width: 90%;" class="xsmallfont fixed left_auto right_auto">
+                        <tr><td colspan="2">
+                            <table style="height:100%;width:100%;">
+                            <tr>
+                                <td colspan="2" class="largefont" style="margin-bottom: 10px;">
+                                    {{ data['media_state']['state'] }}
+                                </td>
+                            </tr>
+                            <tr>	
+                                <td style="width: 30%;" class="xsmallfont" rowspan="3"> 
+                                    <p><img src="{{ data['image_url']['state'] }}" style="max-width:90%; max-height: 120px;" /></p>
+                                </td>
+                                {% if data['title']['state_length'] < 18 %}
+                                <td style="width: 70%;" class="mediumfont"> 
+                                    {{ data['title']['state'] }}
+                                </td>
+                                {% else %}
+                                <td style="width: 70%;" class="smallfont"> 
+                                    {{ data['title']['state'] }}
+                                </td>
+                                {% endif %}
+                            </tr>
+                            <tr>
+                                <td style="width: 70%;" class="xsmallfont"> 
+                                    {{ data['artist']['state'] }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 70%;" class="xxsmallfont"> 
+                                    <div id="mediastarttime" style="display:none;">{{ data['starttime']['state'] }}</div>
+                                    <div id="mediaendtime" style="display:none;">{{ data['endtime']['state'] }}</div>
+                                    <div id="mediaplaying" style="display:none;">{{ data['player']['state'] }}</div>
+                                    <div id="medialastchecked" style="display:none;">{{ data['time']['now'] }}</div>
+                                    <div id="mediaprogress">{{ data['progress'] }}</div>
+                                </td>
+                            </tr>
+                            </table>
+                        </td></tr>
+                        <tr>
+                            <td colspan="2">
+                                <table style="width: 90%; margin-top: 10px;" class="largefont left_5">
+                                    <tr>
+                                        <td style="width:25%;">
+                                            <button class="general xwide dimmed" onclick="widget_media_action('{{ data['page_name'] }}', '{{ data['widget_name'] }}', '{{ data['player']['id'] }}', 'cmd', 'PREVIOUS')">
+                                                <table style="height:100%;width:100%;" class="text_center"><tr>
+                                                <td style="padding: 3px;"><<</td>
+                                                </tr></table>
+                                            </button>
+                                        </td>
+                                        <td style="width:25%;">
+                                            <button class="general xwide dimmed" onclick="widget_media_action('{{ data['page_name'] }}', '{{ data['widget_name'] }}', '{{ data['player']['id'] }}', 'cmd', 'PAUSE')">
+                                                <table style="height:100%;width:100%;" class="text_center"><tr>
+                                                <td style="padding: 3px;">||</td>
+                                                </tr></table>
+                                            </button>
+                                        </td>
+                                        <td style="width:25%;">
+                                            <button class="general xwide dimmed" onclick="widget_media_action('{{ data['page_name'] }}', '{{ data['widget_name'] }}', '{{ data['player']['id'] }}', 'cmd', 'PLAY')">
+                                                <table style="height:100%;width:100%;" class="text_center"><tr>
+                                                <td style="padding: 3px;">></td>
+                                                </tr></table>
+                                            </button>
+                                        </td>
+                                        <td style="width:25%;">
+                                            <button class="general xwide dimmed" onclick="widget_media_action('{{ data['page_name'] }}', '{{ data['widget_name'] }}', '{{ data['player']['id'] }}', 'cmd', 'NEXT')">
+                                                <table style="height:100%;width:100%;" class="text_center"><tr>
+                                                <td style="padding: 3px;">>></td>
+                                                </tr></table>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr></table>
+                </td></tr>
+                <tr style="height: 25%;">
+                    <td>
+                    <table class="xsmallfont left_auto right_auto high xxxwide">
+                    <tr style="height: 100%;">
+                        <td class="text_center" style="width: 20%; padding-top:4%;">
+                            Volume:
+                        </td>
+                        <td style="width: 60%">
+                            <input id="setpoint" class="actions dimmed general mediumfont slider" type="range" style="height:100%;" min="{{ data['volume']['setpoint'][0] }}" max="{{ data['volume']['setpoint'][1] }}" value="{{ data['volume']['state'] }}"
+                            onchange="item_slider_action('{{ data['volume']['id'] }}', '{{ data['volume']['setpoint'][2] }}', '{{ data['volume']['setpoint'][0] }}', '{{ data['volume']['setpoint'][1] }}', 'OK')"></input>
+                        </td>
+                        <td class="text_center" style="width: 20%; padding-top:4%;" id="setpoint_value">
+                            {{ data['volume']['state'] }}
+                        </td>
+                    </tr>
+                    </table>
+                    </td>
+                </td></tr>
+                <tr style="height: 20%;">
+                    <td>
+                        <table style="width: 90%; margin-top: 10px; high" class="largefont left_5">
+                            <tr class="high">
+                                <td style="width:40%;">
+                                    <button class="general dimmed submenu smallfont" style="margin: auto;"	onclick="closepopup()">Close</button>
+                                </td>
+                                <td style="width:60%;">
+                                    <button class="general dimmed submenu smallfont" style="margin: auto;"	onclick="closepopup();item_action('{{ data['stop_media']['type'] }}', '{{ data['stop_media']['id'] }}');">
+                                        Turn all off</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </table>
+                
+            </td>
+            <td style="width: 50%;">
+                <table class="xsmallfont left_auto right_auto high wide">
+                    {% for i in range(1,5) %}
+                        <tr style="height: 25%;"><td>
+                        {% if data['media_selector_'+i|string]['state'] != "None" %}
+                        <button style="height:80%;width:100%;" class="submenu general mediumfont" onclick="item_action('{{ data['media_selector_'+i|string]['type'] }}', '{{ data['media_selector_'+i|string]['id'] }}')">
+                        <table id="item_action_{{ data['media_selector_'+i|string]['id'] }}" style="height:90%;width:100%;" class="lights fixed center">
+                            <tr>
+                                <td style="width: 20%;"><img src="{{ data['media_selector_'+i|string]['icon'] }}" alt="" width="60%"></img></td>
+                                <td style="width: 60%;">{{ data['media_selector_'+i|string + '_title']['state'] }}</td> 
+                                <td style="width: 20%;">{{ data['media_selector_'+i|string]['state'] }}</td>
+                            </tr>                        
+                        </table>
+                        </button>
+                        {% endif %}
+                        </td></tr>
+                    {% endfor %}   
+                </table>
+            </td>
+        </tr>
+        </table>
+        </td>
+    </tr>
+</table>
+</div>

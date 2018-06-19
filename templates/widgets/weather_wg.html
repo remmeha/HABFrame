@@ -1,0 +1,39 @@
+<!-- widget
+    Name=weather_wg/
+    Rows=4/
+-->
+<div class="mediumfont left_5 text_left">{{ data["cw"]["location"] }}</div>
+<button class="general_nob xwide dimmed" onclick="frontpage_action('{{data['pagename']}}', 's_weather_wg')">		
+<table style="width: 100%;" class="xsmallfont left_0">
+<tr>	
+	<td style="width: 55%;" class="xsmallfont"> 
+		<table class="xsmallfont fixed"><tr>
+			<td>Condition:<br>Humidity:<br>Wind:<br>Pressure:<br>{% if data["cw"]["alerts_short"] != "" %} Alerts: {% endif %} </td>
+			<td class="xsmallfont"><strong>{{ data["cw"]["condition"] }}</strong>
+			<br>{{ data["cw"]["humidity"] }}%<br>{{ data["cw"]["wind"] }}
+			<br>{{ data["cw"]["pressure_mb"] }}mb {% if data["cw"]["pressure_trend"] == "-" %} (↓)
+                        {% elif data["cw"]["pressure_trend"] == "+" %} (↑) {% else %}
+                        (=) {% endif %}            
+            <br>{% if data["cw"]["alerts_short"] != "" %} <span style="color: red"> {{ data["cw"]["alerts_short"] }} {% endif %} </span></td>
+		</tr></table>
+	<td style="width: 30%;">
+		<p><img src="{{ data['cw']['icon_url'] }}" width="90%" /></p></td><td style="width: 10%;">{{ data["cw"]["temp_c"] }}&deg;C<br></td>
+</tr>
+</table>
+<table style="width: 100%;" class="xsmallfont top_5 left_0"><tr>
+	<td style="width: 33%;">{{ data["fw"][1]["day"] }}</td>
+	<td style="width: 33%;">{{ data["fw"][2]["day"] }}</td>
+	<td style="width: 33%;">{{ data["fw"][3]["day"] }}</td>
+</tr>
+<tr>
+	<td style="width: 33%;"><img src="{{ data['fw'][1]['icon_url'] }}" width="40%" /></td>
+	<td style="width: 33%;"><img src="{{ data['fw'][2]['icon_url'] }}" width="40%" /></td>
+	<td style="width: 33%;"><img src="{{ data['fw'][3]['icon_url'] }}" width="40%" /></td>
+</tr>
+<tr>
+	<td style="width: 33%; text-align:center;">{{ data["fw"][1]["avg_c"] }}&deg;C / {{ data["fw"][1]["rain_mm"] }}</td>
+	<td style="width: 33%; text-align:center;">{{ data["fw"][2]["avg_c"] }}&deg;C / {{ data["fw"][2]["rain_mm"] }}</td>
+	<td style="width: 25%; text-align:center;">{{ data["fw"][3]["avg_c"] }}&deg;C / {{ data["fw"][3]["rain_mm"] }}</td>
+</tr>
+</table>
+</button>

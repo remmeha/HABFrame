@@ -1,0 +1,43 @@
+<div class="top xwide text_center dimmed largefont margin_2_5"> {{ data['title'] }} </div>
+<!--<div class="top left medium"><div class="time"></div></div>
+<div class="top right text_right"><div class="date xsmallfont dimmed pad_top_5"></div><!--<div class="calendar xxsmallfont"></div></div>-->
+<div class="bottom wide_ text_center left_10"><div class="event text_center dimmed xsmallfont pad_bot_5" id="event_new"></div></div>
+
+
+<div class="xwide top_lower box_full margin_2_5">
+    <table class="switches"  cellpadding="1">
+        <tr>
+            {% if data['showbacknext'] %}
+                <td style="height:100%;width:5%;">
+                    {% if data['linkback'] != "" %}
+                        <button style="height:30%;width:90%;" class="submenu general mediumfont" onclick="reload_main_div('/page/maindiv/{{ data['linkback'] }}')">
+                        <img src="{{ url_for('static', filename='pictures/prev.png') }}" alt="" height="32" width="32"></button>
+                    {% endif %}
+                </td>
+                <td style="height:100%;width:90%;">
+            {% else %}
+                <td style="height:100%;width:100%;">
+            {% endif %}
+            <table class="switches"  cellpadding="1">
+            {% for i in range(data['n_rows']) %}
+                <tr>
+                {% for h in range(data['n_cols']) %}
+                    <td style="height:{{ data['row_height'] }}%; width:{{ data['col_width'] }}%">
+                    [[button_{{ i*data['n_cols']+h }}]]
+                    </td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+            </table>
+            </td>
+            {% if data['showbacknext'] %}
+                <td style="height:100%;width:5%;">
+                    {% if data['linknext'] != "" %}
+                        <button style="height:30%;width:90%;" class="submenu general mediumfont" onclick="reload_main_div('/page/maindiv/{{ data['linknext'] }}')">
+                        <img src="{{ url_for('static', filename='pictures/next.png') }}" alt="" height="32" width="32"></button>
+                    {% endif %}
+                </td>
+            {% endif %}
+        </tr>
+    </table>
+</div>

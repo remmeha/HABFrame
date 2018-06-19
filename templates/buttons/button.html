@@ -1,0 +1,33 @@
+{% if data['header'] %}
+    <button style="height:70%;width:90%;" class="submenu general mediumfont" onclick="{{ data['onclick'] }}">
+    <table id="item_action_{{ data['action_id'] }}" style="height:90%;width:100%;" class="lights fixed center">
+{% endif %}
+    {% if data['type'] != 'changepage' %}
+    <tr>
+        <td style="width: 20%;"><img src="{{ data['icon'] }}" alt="" width="{{ data['icon_width'] }}%"></img></td>
+        <td style="width: {{ data['text_width'] }}%;">{{ data['text'] }}</td>    
+        {% if data['type'] == 'state' and data['state'] != "" %}
+            <td style="width: {{ data['state_width'] }}%;">{{ data['state'] }}</td>
+        {% endif %}
+        {% if data['type'] == 'switch' %}
+            <td style="width: {{ data['state_width'] }}%;">
+                <img src="{{ url_for('static', filename='pictures/Toggle_'+data['state']+'.png') }}" alt="" height="50%" width="100%"></img>
+            </td>
+        {% endif %}
+        {% if data['type'] == 'Colorpicker' %}
+            <td style="width: {{ data['state_width'] }}%;">
+                {% if data['state'] == "off" %} 
+                    off
+                {% else %}
+                    <input id="color" name="Color Picker" type="color" style="width=90px; height=50px;" value="{{ data['state'] }}"/>
+                {% endif %}
+            </td>
+        {% endif %}
+    </tr>
+    {% else %}
+        data["text"]
+    {% endif %}
+{% if data['header'] %}
+    </table>
+    </button>
+{% endif %}

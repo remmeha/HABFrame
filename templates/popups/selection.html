@@ -1,0 +1,18 @@
+<div  class="wide__ left_auto right_auto mediumfont">
+<table class="general wide center top_5 left_auto right_auto" style="height:85%;">
+    {% for n in range(data["n"]) %}
+        {% if data["n"] < 6 or n%2 == 0 %}
+            <tr>
+        {% endif %}
+            <td>
+                <button style="height:90%;width:100%;" class="actions dimmed submenu general mediumfont" onclick="item_popup_action('{{ data['id'] }}', 'cmd', '{{ data['mappings'][n][1] }}')"> 
+                {{ data['mappings'][n][0] }}
+                </button>
+            </td>    
+        {% if data["n"] < 6 or n%2 == 1 %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+
+    <tr><td colspan="2"><button style="height:100%;width:35%;" class="submenu dimmed general mediumfont" onclick="closesmallpopup()"> Close </button></td></tr>
+</table></div>

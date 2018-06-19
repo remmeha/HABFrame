@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Menu</title>
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/sensors.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/range.css') }}"/>
+        {% if data["mouse"] == "off" %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/mouse.css') }}"/>
+        {% endif %}
+        <meta name="google" value="notranslate" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    </head>
+
+    <body id="main_body">
+
+        <div class="wide__ border top_xlower rightx box_full_1 popup" id="message_popup">Message popup</div>
+        <div class="wide border top_lower right_5 box_full popup" id="large_popup">Large popup</div>
+        <div class="medium border top_xxlower right_pop box_full_2 popup" id="small_popup">Small popup</div>
+        <div class="medium xsmallfont border top_low right box_full_3 popup" id="info_popup">Info popup</div>
+        
+        <div class="top absleft medium"><div class="time" id="clocktop"></div></div>
+        <div class="top right text_right"><div id="datetop" class="date xsmallfont pad_top_5"></div><!--<div class="calendar xxsmallfont"></div>--></div>
+        
+        <div class="top right"></div>
+
+        <div id="mainscreenclock" class="wide right_5 left_auto right_auto" style="display:block;">
+            <table class="left_auto right_auto xxmedium" style="height: 100%; text-align:center; vertical-align: middle;"><tr><td>
+                    <div id="digital_clock" class="time xxXlargefont dimmed" style="width:100%; height:100%; text-align:center; display:none;"></div>
+                    <canvas id="canvas_analog_clock" width="390" height="390" style="background-color:#000; display:block; margin: auto;">
+                    </canvas>
+            </td></tr></table>
+        </div>
+
+            
+        <div id="placeholder_main">
+        </div>
+
+
+        <script type="text/javascript">
+        var main_url = "http://{{ data["host"][0] }}:{{ data["host"][1] }}/";
+        var main_url_check = "http://{{ data["host"][0] }}:{{ data["host"][1] }}/check/main/none/none/1520883924";
+        var url_pf_get_picture = "http://{{ data["host"][0] }}:{{ data["host"][1] }}/photoframe/picture";
+        var main_screen_state = "main";
+        var message_unread = "none";
+        var url_save = "none";
+        var event_check_reload_time = "{{ data["event_reload"] }}";
+        var page_reload_time = "{{ data["page_reload"] }}";
+        var clock_type = "digital";
+        </script>
+
+        <script src="{{ url_for('static', filename='js/locales.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/media.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/messages.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/screen_clock_date.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/event_checker.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/item_action.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/album.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/md5.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/Chart.js/dist/Chart.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/create_chart.js') }}"></script>
+        <script>
+            reload_main_div("/page/maindiv");
+            document.getElementById("mainscreenclock").style.position = 'absolute';
+            var topmargin = ((screen.height - 415)/2).toString() + "px";
+            //var topmargin = ((window.innerHeight - 400)/2).toString() + "px";
+            console.log("Top margin" + topmargin) // 189px
+            document.getElementById("mainscreenclock").style.top = topmargin;
+        </script>
+        <!--<script src="/js/main.js?nocache=ea6ec0a12515717bbb9a26af751b7e62"></script>-->
+
+
+
+</body>
+</html>

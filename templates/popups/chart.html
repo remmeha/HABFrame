@@ -1,0 +1,21 @@
+<div id="left_60" class="left_3 top_low xxmedium box_full">
+<!--<img src="http://192.168.1.6:8080/rrdchart.png?items={{ data['name'] }}&period={{ data['chart_period'] }}" alt="" height="95%" width="95%"></img>-->
+
+<div id="chart-wrapper" style="height: 65vh; width: 95%; margin-top: auto; margin-bottom: auto;">
+    <canvas id="myChart"></canvas> 
+    <!-- `options: { responsive: true, maintainAspectRatio: false }`-->
+</div>
+
+<!--<canvas id="myChart" height="100%" width="10%"></canvas>-->
+
+</div>
+<div id="right_half" class="top_lower box_full right_6 xsmall">
+<table class="text_center wide smallfont left_10 center">
+<tr><td colspan="2">{{ data['label'] }}</td></tr>
+<tr><td rowspan="1" style="width: 30%;"><img src="{{ data['icon'] }}" alt="" height="100%" width="100%"></img></td>
+<td style="width: 80%;" rowspan="2" class="xlargefont">{{ data['state'] }}</td></tr>
+<tr><td colspan="2">&nbsp;</td></tr>
+<tr><td colspan="2"><button class="general dimmed submenu mediumfont" style="margin: 10px;"	onclick="item_action('Chart_popup', '{{ data['id'] }}')">Select period</button><br></td></tr><tr>
+<td colspan="2"><button class="general dimmed submenu mediumfont" style="margin: 10px;"	onclick="closepopup()">Close</button><br></td></tr><tr>
+</tr></table>
+</div>

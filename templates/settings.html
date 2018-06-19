@@ -1,0 +1,36 @@
+
+<div class="xwide top_lower box_full margin_2_5">
+    <table class="switches"  cellpadding="1">
+        <tr><td style="height:100%;width:5%;">
+                {% if n['linkback'] != "" %}
+                    <button style="height:30%;width:90%;" class="submenu general mediumfont" onclick="reload_main_div('/page/maindiv/settings/{{ n['linkback'] }}')">
+                    <img src="{{ url_for('static', filename='pictures/prev.png') }}" alt="" height="32" width="32"></button>
+                {% endif %}
+            </td>
+            <td style="height:100%;width:90%;">
+                <table class="switches"  cellpadding="1">
+                    {% for i in range(3) %}
+                        <tr>
+                        {% for h in range(4) %}
+                            <td style="height:33%;width:25%;">
+                            {% if (i*4+h) < n['n'] %}
+                                <button style="height:100%;width:100%;" class="submenu dimmed general mediumfont" onclick="setsetting('{{ data[i*4+h][0] }}')" id="setsetting_{{ data[i*4+h][0] }}">
+                                {{ data[i*4+h][1] }}: {{ data[i*4+h][2] }}</button>
+                            {% endif %}
+                            </td>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </td>
+            <td style="height:100%;width:5%;">
+                {% if n['linknext'] != "" %}
+                    <button style="height:30%;width:90%;" class="submenu general mediumfont" onclick="reload_main_div('/page/maindiv/settings/{{ n['linknext'] }}')">
+                    <img src="{{ url_for('static', filename='pictures/next.png') }}" alt="" height="32" width="32"></button>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+

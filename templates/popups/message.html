@@ -1,0 +1,15 @@
+<div  class="wide__ left_10 smallfont"><h1> Message | {{ data["time"] }}</h1>
+<p><i>From: {{ data["from"] }}</i></p>
+<p><i>Subject: {{ data["subject"] }}</i></p>
+<p class="xsmallfont"> {{ data["message"] }}</p></div>
+<div class="right wide__ bottomxtra text_center">
+<button style="height:100%;width:25%;" class="submenu dimmed general mediumfont" onclick="deletemessage_popup('{{ data['id'] }}')" id="setpframe"> Delete </button>
+&nbsp;
+<button style="height:100%;width:25%;" class="submenu dimmed general mediumfont" onclick="closemessage('{{ data['id'] }}')" id="setpframe"> Close </button>
+{% if data['n_unread'] > 1 %}
+&nbsp;
+<button style="height:100%;width:35%;" class="submenu dimmed general mediumfont" onclick="closeallmessages('{{ data['id'] }}')" id="setpframe"> 
+	Close all ({{ data['n_unread'] }} new) 
+</button>
+{% endif %}
+</div>

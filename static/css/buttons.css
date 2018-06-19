@@ -1,0 +1,67 @@
+button.general {
+	---moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	---webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	--box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background: #000;
+	---filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#bdbdbd');
+	background-color: #000;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:5px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:5px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:5px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:5px;
+	text-indent:0;
+	border: 1px solid #eee;
+	display: inline-block;
+}
+
+button.general_nob {
+	background: #000;
+	---filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#bdbdbd');
+	background-color: #000;
+	text-indent:0;
+    border: 0px solid;
+	display: inline-block;
+}
+
+.noborder {
+	background: #000;
+	display:inline-block;
+	border: 0px solid #eee;
+}
+
+.dimmed {  color: #aaa;}
+
+button.menu {
+	width: 95%;
+	height: 100%;
+	margin-top: 1%;
+	margin-bottom: 2%;
+	padding: 1%;
+}
+
+button.submenu {
+	width: 100%;
+	height: 100%;
+	padding-top: 1px;
+	padding-bottom: 2px;
+}
+
+button.messages {
+	width: 95%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	padding: 1%;
+}
+
+button.actions {
+	min-height: 60px;
+	height: 80%;
+}

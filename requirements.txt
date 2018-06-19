@@ -1,0 +1,7 @@
+Flask
+Flaks_cors
+Image
+python-resize-image
+python-dateutil
+ephem
+numpy

@@ -1,0 +1,33 @@
+
+<div class="bottomclk absleft medium">
+    <div class="image_return"></div>
+    <table class="general left_1">
+        <tr>
+            <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/maindiv')">
+            <img src="{{ url_for('static', filename='pictures/home.png') }}" alt="" height="29" width="29"></button></td>
+            {% if data["returnbutton"] %}
+                <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/maindiv/{{ data['returnbutton'] }}')">
+                <img src="{{ url_for('static', filename='pictures/return.png') }}" alt="" height="29" width="29"></button></td>
+            {% else %}
+                <!--<td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="">
+                <img src="{{ url_for('static', filename='pictures/black.png') }}" alt="" height="29" width="29"></button></td>-->
+            {% endif %} 
+            {% for b in data["bottom"] %}
+            <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/maindiv/{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
+            {% endfor %}
+        </tr>
+    </table>
+</div>
+
+<div class="bottomclk medium right">
+    <div class="image_return"></div>
+    
+    <table class="general right_1 left_auto"><tr>
+    {% if data["habpanel_link"] != "off" %}
+    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -100;" onclick="location.href='{{ data["habpanel_link"] }}';"><img src="{{ url_for('static', filename='pictures/openhab.png') }}" alt="" height="29" width="29"></button></td>
+    {% endif %}
+    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -100;" onclick="reload_main_div('/page/maindiv/messages')"><img src="{{ url_for('static', filename='pictures/messages.png') }}" alt="" height="29" width="29"></button></td>
+    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -100;" onclick="reload_main_div('/page/maindiv/settings')"><img src="{{ url_for('static', filename='pictures/settings.png') }}" alt="" height="29" width="29"></button></td></tr>
+    </table>
+    <!--<div class="event text_center dimmed xsmallfont pad_bot_5" id="events">test</div>-->
+</div>

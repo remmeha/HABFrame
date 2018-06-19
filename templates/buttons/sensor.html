@@ -1,0 +1,25 @@
+{% block button %}
+    <button style="height:70%;width:90%;" class="submenu general mediumfont" onclick="{{ data['onclick'] }}">
+    {% if data['type'] != 'changepage' %}
+    <table id="item_action_{{ data['action_id'] }}" style="height:90%;width:100%;" class="lights fixed center">
+    {% if data['state'] != "" %}
+        <tr>
+            <td style="width: 30%;" rowspan="2"><img src="{{ data['icon'] }}" alt="" width="{{ data['icon_width'] }}%"></img></td>
+            <td class="smallfont" style="width: {{ data['text_width'] }}%;">{{ data['text'] }}</td>
+        </tr>
+        <tr>
+            <td class="xlargefont" style="width: {{ data['state_width'] }}%;">{{ data['state'] }} </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td style="width: 30%;"><img src="{{ data['icon'] }}" alt="" width="{{ data['icon_width'] }}%"></img></td>
+            <td class="smallfont" style="width: {{ data['text_width'] }}%;">{{ data['text'] }}</td>
+        </tr>   
+    {% endif %} 
+    </table>
+    {% else %}
+        data["text"]
+    {% endif %}
+    </button>
+{% endblock %}
+

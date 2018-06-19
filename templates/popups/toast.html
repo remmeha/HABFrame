@@ -1,0 +1,10 @@
+{% if data["len"] > data["max"] and data["len"] < 2*data["max"] %}
+    <div style="margin-bottom: 4px;">{{ data["from"] }}</div>
+    <div class="mediumfont">{{ data["text"] }}</div>
+{% elif data["len"] < data["max"] %}
+    <div style="margin-bottom: 14px;">{{ data["from"] }}</div>
+    <div class="mediumfont">{{ data["text"] }}</div>
+{% else %}
+    <div style="margin-bottom: 10px;">{{ data["from"] }}</div>
+    <div class="smallfont">{{ data["text"] }}</div>
+{% endif %}

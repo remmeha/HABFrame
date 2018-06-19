@@ -1,0 +1,18 @@
+<div  class="wide__ left_auto right_auto mediumfont">
+<table class="general wide center top_5 left_auto right_auto" style="height:85%;">
+<tr><td><button style="height:90%;width:100%;" class="actions dimmed general mediumfont" onclick="item_setpoint_action('{{ data['id'] }}', '{{ data['setpoint'][2] }}', '{{ data['setpoint'][0] }}', '{{ data['setpoint'][1] }}', 'add')">
+     + </button>
+</td></tr>
+<tr>
+	<td id="setpoint" class="actions dimmed general mediumfont border" style="padding: 10px;">
+		{{ data['state'] }}
+	</td>
+</tr>
+<tr><td><button style="height:90%;width:100%;" class="actions dimmed general mediumfont" onclick="item_setpoint_action('{{ data['id'] }}', '{{ data['setpoint'][2] }}', '{{ data['setpoint'][0] }}', '{{ data['setpoint'][1] }}', 'rem')">
+     - </button>
+</td></tr>
+<tr><td><button style="height:90%;width:100%;" class="actions dimmed general mediumfont" onclick="item_setpoint_action('{{ data['id'] }}', '{{ data['setpoint'][2] }}', '{{ data['setpoint'][0] }}', '{{ data['setpoint'][1] }}', 'OK')">
+     OK </button>
+</td></tr>
+<tr><td><button style="height:100%;width:35%;" class="submenu dimmed general mediumfont" onclick="closesmallpopup()"> Close </button></td></tr>
+</table></div>

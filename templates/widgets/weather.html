@@ -1,0 +1,40 @@
+<!-- widget
+    Name=weather/
+    Rows=4/
+-->
+<div class="mediumfont left_5 text_left">{{ data["location"]["state"] }}</div>
+<button class="general_nob xwide dimmed" onclick="frontpage_action('{{ data['pagename'] }}', 's_weather')">		
+<table style="width: 100%;" class="xsmallfont left_0">
+<tr>	
+	<td style="width: 55%;" class="xsmallfont"> 
+		<table class="xsmallfont fixed"><tr>
+			<td>Condition:<br>Humidity:<br>Wind:<br>Pressure<br>
+            {% if data["alerts"]["state"] != "No alerts" %} <span> Alerts: </span> {% endif %} </td>
+			<td class="xsmallfont"><strong>{{ data["now_condition"]["state"] }}</strong>
+			<br>{{ data["now_humidity"]["state"] }}<br>{{ data["now_wind"]["state"] }}
+			<br>{{ data["now_pressure"]["state"] }} {% if data["now_pressure_trend"]["state"] == "-" %} (↓)
+                        {% elif data["now_pressure_trend"]["state"] == "+" %} (↑) {% else %}
+                        (=) {% endif %}   
+            <br>{% if data["alerts"]["state"] != "No alerts" %} <span style="color: red"> Attention weather alerts! </span> {% endif %} </td>
+		</tr></table>
+	<td style="width: 30%;">
+		<p><img src="{{ data['now_condition']['icon'] }}" width="90%" /></p></td><td style="width: 10%;">{{ data["now_temperature"]["state"] }}<br></td>
+</tr>
+</table>
+<table style="width: 100%;" class="xsmallfont top_5 left_0"><tr>
+	<td style="width: 33%;">{{ data["forecast_1_dayname"]["state"] }}</td>
+	<td style="width: 33%;">{{ data["forecast_2_dayname"]["state"] }}</td>
+	<td style="width: 33%;">{{ data["forecast_3_dayname"]["state"] }}</td>
+</tr>
+<tr>
+	<td style="width: 33%;"><img src="{{ data['forecast_1_condition']['icon'] }}" width="40%" /></td>
+	<td style="width: 33%;"><img src="{{ data['forecast_2_condition']['icon'] }}" width="40%" /></td>
+	<td style="width: 33%;"><img src="{{ data['forecast_3_condition']['icon'] }}" width="40%" /></td>
+</tr>
+<tr>
+	<td style="width: 33%; text-align:center;">{{ data['forecast_1_temperature']['state'] }} / {{ data['forecast_1_rain']['state'] }}</td>
+	<td style="width: 33%; text-align:center;">{{ data['forecast_2_temperature']['state'] }} / {{ data['forecast_2_rain']['state'] }}</td>
+	<td style="width: 25%; text-align:center;">{{ data['forecast_3_temperature']['state'] }} / {{ data['forecast_3_rain']['state'] }}</td>
+</tr>
+</table>
+</button>

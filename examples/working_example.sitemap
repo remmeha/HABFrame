@@ -1,0 +1,56 @@
+sitemap working_example label="Working Example "
+{
+	Frame {
+        Text label="items_left" {
+            Text label="This is an example sitemap label [Item state with empty space right]" icon=garden
+            Text label="Empty [Empty]"
+            Frame label="m_Large submenu button" icon=firstfloor {
+                Text label="Power usage [1450W]" icon=energy
+                Text label="Television [ON]" icon=screen
+                Text label="This is a subpage example [State]"
+            }
+            Text label="Power today [230kWh]" icon=energy
+            Frame label="a_Large popup menu button" icon=groundfloor {
+                Text label="Power usage [1450W]" icon=energy
+                Text label="Television [ON]" icon=screen
+                Text label="This is a subpage example [State]"
+            }
+        }
+        Text label="items_right" {
+            Text label="Living humidity 1 [15%]" icon=humidity
+            Frame label="m_Large submenu button" icon=firstfloor {
+                Text label="Power usage [1450W]" icon=energy
+                Text label="Television [ON]" icon=screen
+                Text label="This is a subpage example [State]"
+            }
+            Frame label="a_Large popup menu button" icon=groundfloor {
+                Text label="Power usage [1450W]" icon=energy
+                Text label="Television [ON]" icon=screen
+                Text label="This is a subpage example [State]"
+            }
+            Text label="Living humidity 2 [15%]" icon=humidity
+            Text label="Living humidity 3 [15%]" icon=humidity
+        }
+        Text label="b_Lights" icon="light" {
+            Text label="Living humidity [15%]" icon=humidity
+            Colorpicker item=TV_lamp_cm icon=colorlight
+            Frame label="subpage" icon=temperature {
+                Text label="Temperature [15C]" icon=temperature
+                Text label="Empty"
+                Text label="Power usage [1450W]" icon=energy
+                Text label="Television [ON]" icon=screen
+            }
+		}
+        Text label="b_Heating" icon="heating" {
+            Text label="Living humidity 1 [15%]" icon=humidity
+            Text label="Living humidity 2 [15%]" icon=humidity
+            Text label="Living humidity 3 [15%]" icon=humidity
+            Frame label="subpage" icon=temperature {
+                Text label="Temperature [15C]" icon=temperature
+                Text label="Empty"
+                Text label="Power usage [1450W]" icon=energy
+                Text label="Television [ON]" icon=screen
+            }
+		}
+    }
+}
