@@ -45,6 +45,12 @@ $ python3.5 HABframe.py
 ### Open your webbrowser
 Open http://localhost:8890 and enjoy. :smiley:
 
+:point_down:Screenshot:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_1.png" width="600px" alt="">
+</p>
+
 ## Configuration
 
 Copy and edit the configuration file
@@ -72,10 +78,10 @@ $ cp config/settings_example.xml config/settings.xml
 | enable_clock | Enable the use of a clock as screensaver when screen is on (0: disabled, 1: enabled) |
 | enable_album | Enable the use of an album as screensaver when screen is on (0: disabled, 1: enabled) |
 | <b>WUNDERGROUND | <i>Wunderground settings for when wunderground widgets are used |
-| apikey | wunderground api key |
-| updateperiod | in minutes |
-| language     | language for weather information |
-| location     | weather location (name or zmw location) |
+| apikey | Wunderground api key |
+| updateperiod | Weather data refresh time [minutes] |
+| language     | Language for weather information |
+| location     | Weather location (name or zmw location) |
 | <b>LOGGING   | <i>logging settings |
 | log          | log file |
 | errorlog     | error log file |
@@ -83,8 +89,8 @@ $ cp config/settings_example.xml config/settings.xml
 | level        | error, warn, info, debug, trace |
 | ALBUM        | album settings for when album functionality is enabled |
 | image_size   | resize image to fit screen WxH (eg. 800x480) |
-| random_picture_url | url to retreive random image |
-| picture_info_url | optional: display a line of information about the picture |
+| random_picture_url | url to retreive random image <br> for example: https://picsum.photos/800/480/?image=42 |
+| picture_info_url | optional: Display a line of information about the picture within the frame |
 | <b>DATA | |
 | location | location to store data file |
 | <b>PAGE | |
