@@ -45,10 +45,16 @@ $ python3.5 HABframe.py
 ### Open your webbrowser
 Open http://localhost:8890 and enjoy. :smiley:
 
-:point_down:Screenshot:
+:point_down:Screenshots:
 
-<p align="center">
+<p align="left">
   <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_1.png" width="600px" alt="">
+</p><br>
+<p align="left">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_2.png" width="300px" alt="">
+</p>
+<p align="left">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_3.png" width="300px" alt="">
 </p>
 
 ## Configuration
