@@ -45,16 +45,22 @@ $ python3.5 HABframe.py
 ### Open your webbrowser
 Open http://localhost:8890 and enjoy. :smiley:
 
-:point_down:Screenshots:
+:point_down:Screenshots (more in examples/screenshots):
 
 <p align="left">
-  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_1.png" width="600px" alt="">
-</p><br>
-<p align="left">
-  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_2.png" width="300px" alt="">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_1.png" width="800px" alt="">
 </p>
 <p align="left">
-  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_3.png" width="300px" alt="">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_2.png" width="800px" alt="">
+</p>
+<p align="left">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_3.png" width="800px" alt="">
+</p>
+<p align="left">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_5.png" width="800px" alt="">
+</p>
+<p align="left">
+  <img src="https://raw.githubusercontent.com/remmeha/HABFrame/master/examples/screenshots/Screenshot_7.png" width="800px" alt="">
 </p>
 
 ## Configuration
