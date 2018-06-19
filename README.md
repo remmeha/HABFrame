@@ -87,8 +87,8 @@ $ cp config/settings_example.xml config/settings.xml
 | screen_off_url | url to turn off screen (see enable_screen_control) |
 | screen_on_cmd | command to turn on screen (see enable_screen_control) |
 | screen_off_cmd | command to turn off screen (see enable_screen_control) |
-| enable_clock | Enable the use of a clock as screensaver when screen is on (0: disabled, 1: enabled) |
-| enable_album | Enable the use of an album as screensaver when screen is on (0: disabled, 1: enabled) |
+| enable_clock | Enable the use of a clock as screensaver <br> when screen is on (0: disabled, 1: enabled) |
+| enable_album | Enable the use of an album as screensaver <br> when screen is on (0: disabled, 1: enabled) <br> !check ALBUM settings! |
 | <b>WUNDERGROUND | <i>Wunderground settings for when wunderground widgets are used |
 | apikey | Wunderground api key |
 | updateperiod | Weather data refresh time [minutes] |
@@ -99,7 +99,8 @@ $ cp config/settings_example.xml config/settings.xml
 | errorlog     | error log file |
 | eventlog     | event log file |
 | level        | error, warn, info, debug, trace |
-| ALBUM        | album settings for when album functionality is enabled |
+| rotation     | number of days to keep logfiles |
+| <b>ALBUM        | <i>album settings for when album functionality is enabled |
 | image_size   | resize image to fit screen WxH (eg. 800x480) |
 | random_picture_url | url to retreive random image <br> for example: https://picsum.photos/800/480/?random |
 | picture_info_url | optional: Display a line of information about the picture within the frame |
@@ -132,9 +133,9 @@ The sections 'items_left' and 'items_right' can contain subsection (Frame {}) wh
 | a_{name} | Same as 'm_', but now the menu is a popup |
 | s_media | Displays media widget, using 3/5 rows on the frontpage |
 | c_media | Large button with media widget popup |
-| s_weather | Weather widget. 4 /5 rows used on frontpage |
+| s_weather | Weather widget. 4/5 rows used on frontpage |
 | s_weather_wg | Weather widget with data from Wunderground, see main configuration |
-| s_weather_small | Small weather widget |
+| s_weather_small | Small weather widget, uses 2/5 rows on frontpage |
 | s_weather_small_wg | Small weather widget with data from wunderground |
 
 ### Sub menu's
