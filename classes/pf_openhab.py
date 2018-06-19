@@ -142,7 +142,7 @@ class pf_openhab(Singleton):
                         comp_label = key["label"]
                     try:
                         if key["type"] == "Frame" and (str(subpage_o) == subpage or comp_label == subpage):
-                            print(subpage)
+                            #print(subpage)
                             sub_o = 0
                             for k in key["widgets"]:
                                 sub_o += 1
@@ -252,10 +252,10 @@ class pf_openhab(Singleton):
         item, pagename, subpage, n = self.split_item_name(item_name)
         if state[0:5] == "Color":
             state = self.convert_color_to_hsv(state[5:])
-        cmd = "curl --header \"Content-Type: text/plain\" --request POST --data \"" + state+ "\" " + self.openhab_server + ":" + self.openhab_port + "/rest/items/" + item
-        url = "http://" + self.openhab_server + ":" + self.openhab_port + "/rest/items/"
+        #cmd = "curl --header \"Content-Type: text/plain\" --request POST --data \"" + state+ "\" " + self.openhab_server + ":" + self.openhab_port + "/rest/items/" + item
+        url = "http://" + self.openhab_server + ":" + self.openhab_port + "/rest/items/" + item
         requests.post(url, data=state)
-        self.logging.info("Put state openhab: " + cmd, location="openhab")
+        self.logging.info("Put state openhab: " + url + " " + str(state), location="openhab")
         #os.system(cmd)
         #print(cmd)
         self.load_sitemap()
