@@ -1,11 +1,11 @@
 
 # HABFrame 
-A webserver-based openHAB 'control panel' / photoframe build with python and flask. 
+An openHAB control panel / photoframe. Based on a webserver. Build with python and flask. 
 
 [![](https://img.shields.io/badge/python-3.5%2B-green.svg)]()
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
-I wrote this python Flask app first of all to learn more about python programming and flask and second because I wanted to create an openHAB 'control screen' which also functions as a digital photoframe. The end result is, I think, more easy to configure than HABPanel, but also has less options. 
+I wrote this python Flask app first of all to learn more about python and webserver programming, including html, js, and css. Also I wanted to create an openHAB control panel which functions as a digital photoframe. Check out the end result if you are interested.
 
 Features:
 - Web-based openHAB control panel
@@ -120,7 +120,17 @@ The sections 'items_left' and 'items_right' can contain subsection (Frame {}) wh
 | s_weather_small_wg | Small weather widget with data from wunderground |
 
 ### Sub menu's
-See examples.
+See examples. Use for a submenu. Only 1 level of submenus supported
+
+### Supported items
+
+| Item type | Comment |
+|-----------|---------|
+| Switch    | Switch on / off |
+| Selection | Use mappings for a list of possibilities <br> A mapping with one entry creates a push button |
+| Text      | Creates a button without action, to only show information | 
+| Slider    | A slider popup |
+| Chart     | Creates a button with a chart popup. Note: Only rrd4j is supported as data source |
 
 ## Messages
 send a message
@@ -132,9 +142,31 @@ send a toast popup message
 http://localhost:8890/message/toast?sender=sender&message="this is a toast message"
 ```
 
-## Web page settings
+## Settings
+### Settings page
 
 TBD
+
+### Remote control
+Screen on and off
+| ON  | Screensaver show either clock or photoframe |
+| OFF | Screen is turned off when screensaver is activated |
+
+```url
+http://localhost:8890/state/photoframe/screen/on
+http://localhost:8890/state/photoframe/screen/off
+```
+
+Select Photoframe or clock as screensaver
+```url
+http://localhost:8890/state/photoframe/frame/clock
+http://localhost:8890/state/photoframe/frame/album
+```
+
+Trigger deactivation screensaver
+```url
+http://localhost:8890/state/photoframe/trigger
+```
 
 ## Tips & Tricks
 
