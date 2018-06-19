@@ -253,8 +253,10 @@ class pf_openhab(Singleton):
         if state[0:5] == "Color":
             state = self.convert_color_to_hsv(state[5:])
         cmd = "curl --header \"Content-Type: text/plain\" --request POST --data \"" + state+ "\" " + self.openhab_server + ":" + self.openhab_port + "/rest/items/" + item
+        url = "http://" + self.openhab_server + ":" + self.openhab_port + "/rest/items/"
+        requests.post(url, data=state)
         self.logging.info("Put state openhab: " + cmd, location="openhab")
-        os.system(cmd)
+        #os.system(cmd)
         #print(cmd)
         self.load_sitemap()
         return self.get_item(item_name)

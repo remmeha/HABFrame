@@ -101,7 +101,7 @@ $ cp config/settings_example.xml config/settings.xml
 | level        | error, warn, info, debug, trace |
 | ALBUM        | album settings for when album functionality is enabled |
 | image_size   | resize image to fit screen WxH (eg. 800x480) |
-| random_picture_url | url to retreive random image <br> for example: https://picsum.photos/800/480/?image=42 |
+| random_picture_url | url to retreive random image <br> for example: https://picsum.photos/800/480/?random |
 | picture_info_url | optional: Display a line of information about the picture within the frame |
 | <b>DATA | |
 | location | location to store data file |
