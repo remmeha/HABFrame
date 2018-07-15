@@ -26,13 +26,18 @@ $ git submodule update
 ```
 
 ### Install requirements
-
 ```shell
 $ pip3 install -r requirements.txt
 ```
 
 Make sure you have the following installed:
-
+Flask
+Flaks_cors
+Image
+python-resize-image
+python-dateutil
+ephem
+numpy
 
 ### Run with Python
 
@@ -150,6 +155,8 @@ See examples. Use for a submenu. Only 1 level of submenus supported
 | Text      | Creates a button without action, to only show information | 
 | Slider    | A slider popup |
 | Chart     | Creates a button with a chart popup. Note: Only rrd4j is supported as data source |
+| Colorpicker | Creates a button to select a colorpicker |
+| Setpoint | Including values and steps |
 
 ## Messages
 send a message
