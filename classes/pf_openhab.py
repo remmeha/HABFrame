@@ -324,13 +324,13 @@ class pf_openhab(Singleton):
         if i == None:
             return None
         else:
-            if i["icon"].find("temperature") != -1:
+            if i["icon"].lower().find("temp") != -1:
                 typ = "temp"
-            elif i["icon"].find("humi") != -1:
+            elif i["icon"].lower().find("humi") != -1:
                 typ = "humi"
-            elif i["icon"].find("press") != -1:
+            elif i["icon"].lower().find("press") != -1:
                 typ = "pres"
-            elif i["icon"].find("energy") != -1:
+            elif i["icon"].lower().find("energy") != -1:
                 typ = "watt"
             else:
                 typ = "value"

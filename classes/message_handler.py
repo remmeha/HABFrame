@@ -136,13 +136,13 @@ class message_handler(Singleton):
             return self.format_message_list(start = message_id)
         elif request[0] == "toast":
             if "message" in data_get:
-                self.toast_message = data_get["message"]
+                self.toast_message = data_get["message"].replace("@20", "/").replace("%3B", ":")
             else:
                 self.toast_message = request[2].replace("@20", "/").replace("%3B", ":")
             if "sender" in data_get:
-                self.toast_sender = data_get["sender"]
+                self.toast_sender = data_get["sender"].replace("@20", "/").replace("%3B", ":")
             else:
-                self.toast_sender = request[1]
+                self.toast_sender = request[1].replace("@20", "/").replace("%3B", ":")
             self.toast_received = time.time()
             self.toast_db.append([self.toast_sender, self.toast_message, time.time(), False, 0])
             self.logging.info("Received new toast message: "+self.toast_message, location="messages")	
