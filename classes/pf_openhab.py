@@ -180,7 +180,8 @@ class pf_openhab(Singleton):
                 item_data["icon"] = key["icon"] + "-" + key["item"]["state"]
             if "transformedState" in key["item"]:
                 transformedState = key["item"]["transformedState"]
-                item_data.update( { "icon": key["icon"] + "-" + transformedState } )
+                if len(str(transformedState)) < 15:
+                    item_data.update( { "icon": key["icon"] + "-" + transformedState } )
             if "mappings" in key:
                 item_data.update( { "mappings": key["mappings"] } )
         if "label" in key:
@@ -195,6 +196,8 @@ class pf_openhab(Singleton):
             if item_data["state"] == "NULL":
                 item_data["state"] = "OFF"
                 item_data["icon"] = key["icon"] + "-off"
+            elif len(str(item_data["state"])) > 15:
+                item_data["icon"] = key["icon"]
         
         #### transform state name
         if item_data["label"].find("[") != -1:
