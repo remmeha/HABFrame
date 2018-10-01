@@ -1,1 +1,122 @@
-weather_small.html
+<!-- widget
+    Name=weather_small/
+-->
+<div class="xxxwide high">
+<table class="text_center fixed wide smallfont right_auto left_auto high">
+    <tr style="max-height: 10%;">
+        <td colspan="2" class="largefont">
+            Weather - {{ data["location"]["state"] }}
+        </td>
+    </tr>
+    <tr style="height: 85%;">
+        <td style="width: 50%;">
+            <table class="wide high fixed xsmallfont left_0 fixed">
+            <tr style="height: 60%;">
+                <td style="width: 50%;">
+                    <img src="{{ data['now_condition']['icon'] }}" height="100%" />
+                </td>
+                <td style="width: 50%;" class="xlargefont wrap">
+                    {{ data["now_temperature"]["state"] }}<br>
+                    <span class="mediumfont"><strong>{{ data["now_condition"]["state"] }}</strong></span
+                </td>
+            </tr>
+            {% if data["alerts"]["state"] != "No alerts" %}
+            <tr style="height: 40%;">
+                <td style="width: 100%;" class="xsmallfont wrap" colspan="2"> 
+                Alert:<br>
+                <span class="xxsmalfont" style="color: red">{{ data["alerts"]["state"] }}</span>
+                </td>
+            </tr>
+            {% endif %}
+            <tr style="height: 40%;">
+                <td style="width: 100%;" class="xsmallfont" colspan="2"> 
+                <table class="xsmallfont fixed high wide">
+                    <!--<tr><td colspan="3">Condition:</td>
+                        <td colspan="2" class="xsmallfont"><strong>{{ data["now_condition"]["state"] }}</strong></td>
+                    </tr>-->
+                    <tr class="xxsmallfont">
+                        <td style="width: 7%;">
+                            <img src="{{ data['now_humidity']['icon'] }}" width="19px" /><br>
+                            <img src="{{ data['today_sunrise']['icon'] }}" width="19px" /><br>
+                            <img src="{{ data['today_sunset']['icon'] }}" width="19px" /></td>
+                        <td style="width: 23%;">Humidity:<br>Sunrise:<br>Sunset:</td>
+                        <td style="width: 14%; ">{{ data["now_humidity"]["state"] }}
+                        <br>{{ data["today_sunrise"]["state"] }}<br>{{ data["today_sunset"]["state"] }}</td>
+                        <td style="width: 7%;">
+                            <img src="{{ data['now_feelslike']['icon'] }}" width="19px" /><br>
+                            <img src="{{ data['now_pressure']['icon'] }}" width="19px" /><br>
+                            <img src="{{ data['now_wind']['icon'] }}" width="19px" /></td>
+                        <td style="width: 21%; ">Feels like:<br>Pressure:<br>Wind:<br></td>
+                        <td style="width: 28%; overflow: none; white-space: nowrap;">{{ data["now_feelslike"]["state"] }}<br>{{ data["now_pressure"]["state"] }}
+                        {% if data["now_pressure_trend"]["state"] == "-" %} (↓)
+                        {% elif data["now_pressure_trend"]["state"] == "+" %} (↑) {% else %}
+                        (=) {% endif %}  
+                        <br>{{ data["now_wind"]["state"] }}<br></td>
+                    </tr>              
+                </table>
+                </td>
+            </tr>
+            </table>
+        </td>
+        <td style="width: 50%;">
+            <table class="wide fixed high xsmallfont left_0">
+            <tr style="height: 33%;">
+                <td style="width: 28%;" class="smallfont">
+                    {{ data["forecast_1_dayname"]["state"] }}<br><br>
+                </td>
+                <td style="width: 47%;">
+                    <table class="xxsmallfont fixed high"><tr>
+                        <td>Condition:<br>High:<br>Low:<br>Rain:<br></td>
+                        <td class="xxsmallfont"><strong>{{ data["forecast_1_condition"]["state"] }}</strong>
+                        <br>{{ data['forecast_1_temp_high']['state'] }}<br>{{ data['forecast_1_temp_low']['state'] }}
+                        <br>{{ data['forecast_1_rain']['state'] }}</td>
+                    </tr></table>
+                </td>
+                <td style="width: 25%;">
+                    <img src="{{ data['forecast_1_condition']['icon'] }}" width="100%" />
+                </td>
+            </tr>
+            <tr style="height: 33%;">
+                <td style="width: 28%;" class="smallfont">
+                    {{ data["forecast_2_dayname"]["state"] }}<br><br>
+                </td>
+                <td style="width: 47%;">
+                    <table class="xxsmallfont fixed high"><tr>
+                        <td>Condition:<br>High:<br>Low:<br>Rain:<br></td>
+                        <td class="xxsmallfont"><strong>{{ data["forecast_2_condition"]["state"] }}</strong>
+                        <br>{{ data['forecast_2_temp_high']['state'] }}<br>{{ data['forecast_2_temp_low']['state'] }}
+                        <br>{{ data['forecast_2_rain']['state'] }}</td>
+                    </tr></table>
+                </td>
+                <td style="width: 25%;">
+                    <img src="{{ data['forecast_2_condition']['icon'] }}" width="100%" />
+                </td>
+            </tr>
+            <tr style="height: 33%;">
+                <td style="width: 28%;" class="smallfont">
+                    {{ data["forecast_3_dayname"]["state"] }}<br><br>
+                </td>
+                <td style="width: 47%;">
+                    <table class="xxsmallfont fixed high"><tr>
+                        <td>Condition:<br>High:<br>Low:<br>Rain:<br></td>
+                        <td class="xxsmallfont"><strong>{{ data["forecast_3_condition"]["state"] }}</strong>
+                        <br>{{ data['forecast_3_temp_high']['state'] }}<br>{{ data['forecast_3_temp_low']['state'] }}
+                        <br>{{ data['forecast_3_rain']['state'] }}</td>
+                    </tr></table>
+                </td>
+                <td style="width: 25%;">
+                    <img src="{{ data['forecast_3_condition']['icon'] }}" width="100%" />
+                </td>
+            </tr>
+            </table>
+        </td>
+    </tr>
+    <tr style="height: 5%;">
+        <td colspan="2">
+            <table class="text_center xsmall left_auto right_auto">
+            <tr><td><button class="general dimmed submenu mediumfont" style="margin: auto;"	onclick="closepopup()">Close</button></td></tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</div>

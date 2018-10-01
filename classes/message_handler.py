@@ -47,7 +47,7 @@ class message_handler(Singleton):
         if request[0] == "new":			
             try:
                 if "message" in data_get:
-                    message = data_get["message"]
+                    message = data_get["message"].replace("@20", "/").replace("%3B", ":")
                 else:
                     message = request[2].replace("@20", "/").replace("%3B", ":")
                 if "sender" in data_get:
