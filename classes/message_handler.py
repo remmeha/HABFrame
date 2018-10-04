@@ -73,7 +73,8 @@ class message_handler(Singleton):
                 message = self.database.data["messages"][i]
                 if not message[-1]: 
                     show_message = [i] + message
-                    found = True
+                    #we want the last unread message
+                    #found = True
                 i += 1
             n_unread = self.check_amount_unread()
             times = datetime.datetime.fromtimestamp(float(message[0])).strftime('%a %d-%m, %H:%M')

@@ -1,4 +1,5 @@
 *.pyc
 *.log
 *__pycache__*
+data/main_db.pckl
 settings.xml
