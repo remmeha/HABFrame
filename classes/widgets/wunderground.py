@@ -9,6 +9,41 @@ import pytz
 from singleton import Singleton
 from settings import Settings
 from logger import Logging
+from widget import widget
+
+
+class wunderground_widget(widget):
+    
+    def __init__(self):
+        widget.__init__(self)
+    
+    def get_data(self, item_data):
+        pass
+    
+    def get_weather(self):
+        try:
+            self.lm = LocationManager()	
+            settings_c = Settings()
+            location = settings_c.get_setting("wunderground", "location")
+            loc = self.lm.GetLocation(location)
+            try:
+                current = loc.read_current()
+                forecast = loc.read_forecast()
+                alerts = loc.read_alerts()
+                if len(alerts) > 0:
+                    current["alerts"] = alerts[0]["description"]
+                    current["alerts_short"] = "Attention weather alerts!"
+                else:
+                    current["alerts"] = "No alerts"
+                    current["alerts_short"] = ""
+                return { "cw": current, "fw": forecast, "location": location }
+            except:
+                link = loc.link
+                error = "Check WG location: %s" %(link)
+        except Exception as e:
+            error = "Check wunderground settings: %s" %str(e)
+        self.logging.error(error, location=self.name)
+        return { "error": error }
 
 
 class LocationManager(Singleton):
