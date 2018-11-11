@@ -260,7 +260,7 @@ class state_handler(Singleton):
         if to == "off":
             to = 24*60*300
         self.logging.info("refreshing screensaver", location=self.name)
-        self.update_timeout("screensaver", int(to)*6)
+        self.update_timeout("screensaver", int(to)*60)
         self.delete_timeout("screensaver_subpage")
         
     def refresh_screensaver_subpage(self):

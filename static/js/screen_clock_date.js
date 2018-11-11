@@ -38,6 +38,14 @@ time.init = function () {
 time.init()
 
 var canvas = document.getElementById("canvas_analog_clock");
+var size = parseInt(($(window).width() * 0.9) / 2.5);
+$(canvas).css('width', size);
+$(canvas).css('height', size);
+document.getElementById("mainscreenclock").style.position = 'absolute';
+var topmargin = ((screen.height - size)/2).toString() + "px";
+console.log("Top margin: " + topmargin) // 189px
+document.getElementById("mainscreenclock").style.top = topmargin;
+console.log("Clock size: "+size)
 var ctx = canvas.getContext("2d");
 var radius = canvas.height / 2;
 ctx.translate(radius, radius);

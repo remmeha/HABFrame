@@ -72,11 +72,6 @@
         <script src="{{ url_for('static', filename='js/create_chart.js') }}"></script>
         <script>
             reload_main_div("/page/maindiv");
-            document.getElementById("mainscreenclock").style.position = 'absolute';
-            var topmargin = ((screen.height - 415)/2).toString() + "px";
-            //var topmargin = ((window.innerHeight - 400)/2).toString() + "px";
-            console.log("Top margin" + topmargin) // 189px
-            document.getElementById("mainscreenclock").style.top = topmargin;
         </script>
         <!--<script src="/js/main.js?nocache=ea6ec0a12515717bbb9a26af751b7e62"></script>-->
 
