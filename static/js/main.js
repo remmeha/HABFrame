@@ -73,6 +73,13 @@ function get_widget_clock_page() {
     xmlHttpcheck1.open( "GET", main_url.concat("page/clk_widget/"), false );
     xmlHttpcheck1.send( null );
     document.getElementById("widget_clock_page").innerHTML = xmlHttpcheck1.responseText;
+    if (xmlHttpcheck1.responseText == "") {
+         document.getElementById("widget_clock_page").width = "0%";
+         document.getElementById("clock_page_clk").width = "100%";
+    } else {
+        document.getElementById("widget_clock_page").width = "50%";
+        document.getElementById("clock_page_clk").width = "50%";
+    }
     resize_digital_clk();
 }
 
@@ -101,6 +108,15 @@ function resize_digital_clk() {
             tries += 1;
           }
         
+        var topmargin = ((screen.height - el.scrollHeight)/2).toString() + "px";
+        console.log("Top margin: " + topmargin) // 189px
+        document.getElementById("mainscreenclock").style.top = topmargin;
+        
+    } else {
+        var size = parseInt(($(window).width() * 0.9) / 2.5);
+        var topmargin = ((screen.height - size)/2).toString() + "px";
+        console.log("Top margin: " + topmargin) // 189px
+        document.getElementById("mainscreenclock").style.top = topmargin;
     }
 }
 
