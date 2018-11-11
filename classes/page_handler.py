@@ -99,6 +99,8 @@ class page_handler():
         elif pagename in ["clock", "black"]:
             cl = self.setting_handler.get_setting("clock_type")
             return render_template("clock.html", data = { "type_clock": cl })
+        elif pagename == "clk_widget":
+            return self.get_clock_page_widget()
         elif pagename == "photoframe":
             return self.create_photoframe()
         
@@ -126,6 +128,24 @@ class page_handler():
         if settings_c.get_setting("main", "enable_album") == "1":
             page_data["album_display_time"] = self.setting_handler.get_setting("frame_display_time")
         return render_template("main.html", data = page_data)
+        
+    def get_clock_page_widget(self):
+        ml = self.openhab.get_items("clock_page")[0]
+        data = []
+        if len(ml) > 0:
+            itemdata = ml[0]
+            itemdata.update( { "onclick": "" } )
+            itemtype = self.widgets_handler.check_widget_type(itemdata["label"])
+            if itemtype[0:6] == "widget": ##special item takes 3 rows              
+                data.append(itemdata)
+                data[-1]["group"] = itemtype[7:8]+"rows"
+                data[-1]["label_c"] = itemdata["label"]
+                data[-1]["label"] = self.widgets_handler.get_widget_label(itemdata["label"]).upper()
+        if len(data) > 0:
+            item = data[0]
+            page = self.widgets_handler.render_widget("clock_page", item["label_c"])
+            return page
+        return ""
     
     def create_main_div(self):
         ml = self.openhab.get_items("items_left")[0]

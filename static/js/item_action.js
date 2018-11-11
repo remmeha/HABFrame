@@ -107,7 +107,11 @@ function reload_after_action() {
 		console.log("Reloading main div");
 		reload_main_div(url_save);
 		nextExecute = timeStampInMs + 8000
-	}
+	} else if (timeStampInMs > nextExecute && url_save.search("clock") != -1) {
+        console.log("Reloading clk widget");
+		get_widget_clock_page();
+		nextExecute = timeStampInMs + 8000
+    }
 	setTimeout(reload_after_action, 250);
 }
 setTimeout(reload_after_action, 1000);

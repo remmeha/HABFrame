@@ -142,6 +142,8 @@ html {
 	display: none;
 }
 
+.ovflw_hidden { overflow: hidden; }
+
 .show { display: ''; }
 .hide { display: none; }
 .picture { position: absolute; top: 0; left: 0; }
