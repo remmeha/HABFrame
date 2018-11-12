@@ -104,6 +104,9 @@ class widgets_handler:
             return name
         
     def get_widget_label(self, name):
+        for n in ["b_"]:
+            if name.find(n) != -1:
+                return name[name.find(n)+2:]
         if name.find("[") != -1 and name.find("]") != -1:
             name = name[name.find("[")+1:name.find("]")]
             return name

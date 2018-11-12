@@ -270,6 +270,7 @@ class page_handler():
             else:
                 N_items_pp = 9
         page_format = self.__get_page_data__(len(items), N_items_pp, sensor_page = sensor_page)
+        #print(page_data[0], self.widgets_handler.get_widget_label(page_data[0]))
         page_format.update( { "title": self.widgets_handler.get_widget_label(page_data[0]), "returnbutton": False, "linkback": "", "linknext": "", "showbacknext": True } )
         if handle_as_popup:
             sensor_page = False
