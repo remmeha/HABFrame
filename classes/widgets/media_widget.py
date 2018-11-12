@@ -1,5 +1,6 @@
 from widget import widget
 import time
+import datetime
 
 class media_widget(widget):
     
@@ -22,7 +23,8 @@ class media_widget(widget):
             progress = datetime.datetime.fromtimestamp(p/1000.0).strftime("%M:%S") + " / " + datetime.datetime.fromtimestamp(duration/1000.0).strftime("%M:%S")
             if duration > 10*60*1000:
                 progress = progress + " (%.1f%%)" %(p/duration*100)
-        except:
+        except Exception as e:
+            self._logging.error("Exception in media widget: %s" %e, location="media_widget")
             if d["player"]['state'].lower() == "play":
                 progress = "Playing"
             elif d["player"]['state'].lower() == "pause":

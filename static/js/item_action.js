@@ -3,6 +3,11 @@ var current_popup_url = ""
 function frontpage_action(page, sub) {
     current_popup_url = main_url.concat("page/popup/").concat(page).concat("/").concat(sub);
     frontpage_action_load(update = "false");
+    //make sure that the popup on a clock page closes after xx seconds
+        if (main_screen_state == "clock") {
+            console.log("closing popup after seconds")
+            setTimeout(closepopup, 15000);
+        }
 }
 
 function frontpage_action_load(update = "true") {
@@ -84,6 +89,7 @@ function item_action(item_type, item_name, or = "sub") {
 			document.getElementById("message_popup").style.display = 'block'; 
 			document.getElementById("message_popup").innerHTML = xmlHttp1.responseText;
 		}
+        
 	}
 	
     if (or == "main") {

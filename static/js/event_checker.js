@@ -76,10 +76,6 @@ function EventChecker() {
 			popup_message();	
 		} 
 		//setTimeout(EventChecker, 10*1000)
-        if ( main_screen_state == "clock") {
-            
-            
-        }
 	}
 	catch(err) {
     	//setTimeout(EventChecker, 10*1000)

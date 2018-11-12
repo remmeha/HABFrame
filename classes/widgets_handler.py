@@ -81,7 +81,7 @@ class widgets_handler:
     def get_widget_data(self, w_info, item_data):
         if w_info["name"] not in self.imported_widget_classes:
             try:
-                a = __import__(w_info["name"])
+                a = __import__(w_info["name"] + "_widget")
                 self.imported_widget_classes[w_info["name"]] = getattr(a, w_info["name"] + "_widget")()
             except:
                 self.logging.warn("Could not create widget %s" %str(w_info["name"]), location=self.name)
