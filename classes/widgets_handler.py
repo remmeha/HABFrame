@@ -47,11 +47,14 @@ class widgets_handler:
             return render_template("error.html", data = { "error": str(er) })
         
     
-    def create_mainpage_popup(self, page, subpage):
+    def create_mainpage_popup(self, page, subpage, menuwidget = False):
         data = self.openhab.get_items(page, subpage)
         item_data = self.render_item_data_for_widget(data[0])
         if len(item_data) == 0:
-            return "widget not in sitemap"
+            #return "widget not in sitemap"
+            self.logging.error("Widget is not in sitemap", location=self.name)
+            er = self.render_widget_error("cannot find widget in sitemap", subpage)  
+            return render_template("popups/error.html", data = { "error": str(er) })
         info = self.get_widget_info(subpage, main_page = page)
         try:
             item_data = self.get_widget_data(info, item_data)
@@ -64,7 +67,7 @@ class widgets_handler:
             
         item_data["page_name"] = page
         item_data["widget_name"] = subpage
-        
+        item_data["menuwidget"] = menuwidget
         if info == None:
             return render_template("popups/error.html", data = { "error": "Popup widget template for %s does not exist" %subpage.lower() } )
         elif info["template"] == "generic_button_page":
@@ -72,7 +75,14 @@ class widgets_handler:
         else:
             try:
                 self.logging.debug("Rendering popup widget: %s" %info["template"], location=self.name)
-                return render_template("popup_widgets/"+info["template"]+".html", data = item_data)
+                data = render_template("popup_widgets/"+info["template"]+".html", data = item_data)
+                if menuwidget:
+                    title = self.find_var(data, "Title")
+                    if title == None:
+                        title = ""
+                    return data, title
+                else:
+                    return data
             except Exception as e:
                 self.logging.error("Error creating popup widget %s" %str(e), location=self.name)
                 er = self.render_widget_error(e, subpage)  
@@ -143,8 +153,9 @@ class widgets_handler:
                         data=myfile.read().replace('\n', '')
                     n = self.find_var(data, "Name")
                     rows = self.find_var(data, "Rows")
+                    title = self.find_var(data, "Title")
                     if rows != None and n != None:
-                        return { "name": n, "rows": int(rows), "template": name_lower, "type": "frontpage_widget", "pagename": main_page }
+                        return { "title": title, "name": n, "rows": int(rows), "template": name_lower, "type": "frontpage_widget", "pagename": main_page }
             else:   ##popup
                 f_name = self.template_dir + "popup_widgets/" + name_lower + ".html"
                 if Path(f_name).is_file():
@@ -158,8 +169,8 @@ class widgets_handler:
     def find_var(self, data, var):
         if data.find(var+"=") != -1:
             pos = data.find(var+"=")
-            pos2 = data[pos+5:].find("/")
-            return data[pos+5:pos+5+pos2]
+            pos2 = data[pos+len(var)+1:].find("/")
+            return data[pos+len(var)+1:pos+len(var)+1+pos2]
         else:
             return None
     

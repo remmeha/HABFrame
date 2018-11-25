@@ -46,7 +46,7 @@ function reload_main_div(url) {
         } else {
             stop_photoframe();
         }
-        if (url.search("/maindiv") != -1) {
+        if (url.search("/maindiv") != -1 || url.search("/menuwidget") != -1) {
             //add reload to make sure server doesn't refresh screensaver
             if (url.search("/reload") == -1) {
                 url_save = url.concat("/reload");

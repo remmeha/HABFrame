@@ -1,13 +1,16 @@
 <!-- widget
     Name=weather_small/
+    Title=Weather - {{ data["location"]["state"] }}/
 -->
 <div class="xxxwide high">
 <table class="text_center fixed wide smallfont right_auto left_auto high">
-    <tr style="max-height: 10%;">
-        <td colspan="2" class="largefont">
-            Weather - {{ data["location"]["state"] }}
-        </td>
-    </tr>
+    {% if not data["menuwidget"] %}
+        <tr style="max-height: 10%;">
+            <td colspan="2" class="largefont">
+                Weather - {{ data["location"]["state"] }}
+            </td>
+        </tr>
+    {% endif %}
     <tr style="height: 85%;">
         <td style="width: 50%;">
             <table class="xwide high fixed xsmallfont left_0 fixed">
@@ -116,12 +119,14 @@
             </table>
         </td>
     </tr>
-    <tr style="height: 5%;">
-        <td colspan="2">
-            <table class="text_center xsmall left_auto right_auto">
-            <tr><td><button class="general dimmed submenu mediumfont" style="margin: auto;"	onclick="closepopup()">Close</button></td></tr>
-            </table>
-        </td>
-    </tr>
+    {% if not data["menuwidget"] %}
+        <tr style="height: 5%;">
+            <td colspan="2">
+                <table class="text_center xsmall left_auto right_auto">
+                <tr><td><button class="general dimmed submenu mediumfont" style="margin: auto;"	onclick="closepopup()">Close</button></td></tr>
+                </table>
+            </td>
+        </tr>
+    {% endif %}
 </table>
 </div>

@@ -84,6 +84,20 @@ class page_handler():
                 if lowerpage[0] == "reload":
                     lowerpage = [0]
                 return self.create_subpage(subpage, subsubpage, lowerpage[0])
+        elif pagename == "menuwidget":
+            self.logging.write("Loading menu widget: "+subpage+"/"+subsubpage, level=2, location=self.name)
+            if not "reload" in pagelist and not "screensaver" in pagelist:
+                self.state_handler.toggle_screen(state = True)
+                self.state_handler.refresh_screensaver_subpage()
+            widget, title = self.widgets_handler.create_mainpage_popup(subpage, subpage, True)
+            page_format = {"title": title }
+            page = render_template("subpage_widget.html", data = page_format)
+            page = page.replace("[[WIDGET]]", widget)
+            page = self.add_bottom_bar(page )
+            if widget == "widget not in sitemap":
+                return "widget not in sitemap"
+            else:
+                return page
         elif pagename == "popup": ##this is a popup widget
             self.logging.write("Loading popup div: "+subpage+"/"+subsubpage, level=2, location=self.name)
             if not "reload" in pagelist and not "screensaver" in pagelist:
@@ -328,10 +342,12 @@ class page_handler():
         return self.add_bottom_bar(page)
         
     def add_bottom_bar(self, page, returnbutton = False):
-        pages = self.openhab.get_pages(["b_", "c_", "s_"])
+        pages = self.openhab.get_pages(["b_", "c_", "d_"])
         for i in range(len(pages)):
             if pages[i]["label"][0:2] == "b_":
                 pages[i]["type"] = "button"
+            elif pages[i]["label"][0:2] == "c_": 
+                pages[i]["type"] = "menuwidget"
             else:
                 pages[i]["type"] = "popup"
         page_format = { "bottom": pages }
@@ -370,11 +386,9 @@ class page_handler():
         
         itemtype = self.widgets_handler.check_widget_type(item_info["label"])
         if item_info["type"] == "Frame" and (itemtype == "menu_popup" or itemtype[0:6] == "widget"):
-            print(item_info)
             data.update( { "onclick": "frontpage_action('"+str(item_info["page"])+"', '"+item_info["label"]+"')" } )
             data["text"] = self.widgets_handler.get_widget_label(item_info["name"])
             data["text_width"] = 80
-            print(data)
         elif item_info["type"] == "Frame":
             data.update( { "onclick": "reload_main_div('/page/maindiv/" + str(item_info["page"]) +"/0/"+ str(item_info["subpage"]) +"')", "text_width": 80 } )
             data.update( self.format_item_string(item_info["label"], item_info["state"], button_width) )
@@ -389,7 +403,6 @@ class page_handler():
         else:
             data.update( self.format_item_string(item_info["label"], item_info["state"], button_width) )
             data.update( { "type": "state" } )
-        print(data)
         if sensor_button:
             data.update( { "text_width": 70, "state_width": 70, "icon_width": 80 } )
             page = render_template("buttons/sensor.html", data = data)
