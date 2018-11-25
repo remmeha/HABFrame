@@ -10,8 +10,8 @@
     </tr>
     <tr style="height: 85%;">
         <td style="width: 50%;">
-            <table class="wide high fixed xsmallfont left_0 fixed">
-            <tr style="height: 60%;">
+            <table class="xwide high fixed xsmallfont left_0 fixed">
+            <tr style="height: 55%;">
                 <td style="width: 50%;">
                     <img src="{{ data['now_condition']['icon'] }}" height="100%" />
                 </td>
@@ -28,9 +28,14 @@
                 </td>
             </tr>
             {% endif %}
-            <tr style="height: 40%;">
-                <td style="width: 100%;" class="xsmallfont" colspan="2"> 
-                <table class="xsmallfont fixed high wide">
+            <tr style="height: 15%;">
+                <td style="width: 100%;" class="xxsmallfont wrap" colspan="2"> 
+                <span>{{ data["summary"]["state"] }}</span>
+                </td>
+            </tr>
+            <tr style="height: 35%;">
+                <td style="width: 100%;" class="xxsmallfont" colspan="2"> 
+                <table class="xsmallfont fixed overflow high wide">
                     <!--<tr><td colspan="3">Condition:</td>
                         <td colspan="2" class="xsmallfont"><strong>{{ data["now_condition"]["state"] }}</strong></td>
                     </tr>-->
@@ -47,7 +52,7 @@
                             <img src="{{ data['now_pressure']['icon'] }}" width="19px" /><br>
                             <img src="{{ data['now_wind']['icon'] }}" width="19px" /></td>
                         <td style="width: 21%; ">Feels like:<br>Pressure:<br>Wind:<br></td>
-                        <td style="width: 28%; overflow: none; white-space: nowrap;">{{ data["now_feelslike"]["state"] }}<br>{{ data["now_pressure"]["state"] }}
+                        <td style="width: 28%; overflow: auto; white-space: nowrap;">{{ data["now_feelslike"]["state"] }}<br>{{ data["now_pressure"]["state"] }}
                         {% if data["now_pressure_trend"]["state"] == "-" %} (↓)
                         {% elif data["now_pressure_trend"]["state"] == "+" %} (↑) {% else %}
                         (=) {% endif %}  

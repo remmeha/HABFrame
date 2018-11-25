@@ -14,4 +14,5 @@ td.switches_height { height: 33%; }
 table.switches td { border: 0px solid white; text-align: center; }
 
 table.fixed { table-layout: fixed;	overflow: hidden;	white-space: nowrap; }
+table.overflow { overflow: auto; }
 .wrap { white-space: normal; overflow: auto; }
