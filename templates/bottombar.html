@@ -13,7 +13,11 @@
                 <img src="{{ url_for('static', filename='pictures/black.png') }}" alt="" height="29" width="29"></button></td>-->
             {% endif %} 
             {% for b in data["bottom"] %}
-            <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/maindiv/{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
+                {% if b["type"] == "button" %}
+                    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/maindiv/{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
+                {% else %}
+                    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="frontpage_action('{{ b['label'] }}', '{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
+                {% endif %}
             {% endfor %}
         </tr>
     </table>

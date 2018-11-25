@@ -36,14 +36,19 @@ class pf_openhab(Singleton):
             self.http = urllib3.PoolManager()   	
                 
     def get_pages(self, filter):
+        if type(filter) != list:
+            filter = [filter]
         self.load_sitemap()
         data = []
         n = 0
         for i in range(len(self.sitemap["homepage"]["widgets"][0]["widgets"])):
             key = self.sitemap["homepage"]["widgets"][0]["widgets"][i]
-            if key["label"].find(filter) != -1:
-                icon_url = "/item/icon/" + key["icon"] + ".png"
-                data.append({ "label": key["label"], "icon": icon_url, "id": n})
+            found = False
+            for filt in filter:
+                if key["label"][0:len(filt)] == filt and not found:
+                    icon_url = "/item/icon/" + key["icon"] + ".png"
+                    data.append({ "label": key["label"], "icon": icon_url, "id": n})
+                    found = True
             n += 1
         return data
         

@@ -328,7 +328,13 @@ class page_handler():
         return self.add_bottom_bar(page)
         
     def add_bottom_bar(self, page, returnbutton = False):
-        page_format = { "bottom": self.openhab.get_pages("b_") }
+        pages = self.openhab.get_pages(["b_", "c_", "s_"])
+        for i in range(len(pages)):
+            if pages[i]["label"][0:2] == "b_":
+                pages[i]["type"] = "button"
+            else:
+                pages[i]["type"] = "popup"
+        page_format = { "bottom": pages }
         page_format["returnbutton"] = returnbutton
         page_format["habpanel_link"] = Settings().get_setting("main", "habpanel_link")
         page += "\n\n\n"
@@ -361,10 +367,18 @@ class page_handler():
         if small_icon:
             data.update( { "icon_width": 70, "icon_height": 70 } )
         data.update( { "onclick": "item_action('"+item_info["type"]+"', '"+item_info["id"]+"')" } )
-        if item_info["type"] == "Frame":
+        
+        itemtype = self.widgets_handler.check_widget_type(item_info["label"])
+        if item_info["type"] == "Frame" and (itemtype == "menu_popup" or itemtype[0:6] == "widget"):
+            print(item_info)
+            data.update( { "onclick": "frontpage_action('"+str(item_info["page"])+"', '"+item_info["label"]+"')" } )
+            data["text"] = self.widgets_handler.get_widget_label(item_info["name"])
+            data["text_width"] = 80
+            print(data)
+        elif item_info["type"] == "Frame":
             data.update( { "onclick": "reload_main_div('/page/maindiv/" + str(item_info["page"]) +"/0/"+ str(item_info["subpage"]) +"')", "text_width": 80 } )
-        ##
-        if item_info["type"] == "Switch":
+            data.update( self.format_item_string(item_info["label"], item_info["state"], button_width) )
+        elif item_info["type"] == "Switch":
             data.update( { "text": self.format_string(item_info["label"], int(20*(button_width/100))), "state": item_info["state"].lower(), "text_width": 60, "state_width": 20 } )
             data.update( { "type": "switch" } )
         elif item_info["type"] == "Switch_single":
@@ -375,7 +389,7 @@ class page_handler():
         else:
             data.update( self.format_item_string(item_info["label"], item_info["state"], button_width) )
             data.update( { "type": "state" } )
-        #print(data)
+        print(data)
         if sensor_button:
             data.update( { "text_width": 70, "state_width": 70, "icon_width": 80 } )
             page = render_template("buttons/sensor.html", data = data)
