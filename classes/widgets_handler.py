@@ -63,7 +63,10 @@ class widgets_handler:
         except Exception as e:
             self.logging.error("Error creating widget %s" %str(e), location=self.name)
             er = self.render_widget_error(e, subpage)  
-            return render_template("popups/error.html", data = { "error": str(er) })
+            if menuwidget:
+                return render_template("popups/error.html", data = { "error": str(er) }), "Error"
+            else:
+                return render_template("popups/error.html", data = { "error": str(er) })
             
         item_data["page_name"] = page
         item_data["widget_name"] = subpage
@@ -85,8 +88,11 @@ class widgets_handler:
                     return data
             except Exception as e:
                 self.logging.error("Error creating popup widget %s" %str(e), location=self.name)
-                er = self.render_widget_error(e, subpage)  
-                return render_template("popups/error.html", data = { "error": str(er) })
+                er = self.render_widget_error(e, subpage) 
+                if menuwidget: 
+                    return render_template("popups/error.html", data = { "error": str(er) }), "Error"
+                else:
+                    return render_template("popups/error.html", data = { "error": str(er) })
                 
     def get_widget_data(self, w_info, item_data):
         if w_info["name"] not in self.imported_widget_classes:
