@@ -392,6 +392,8 @@ class page_handler():
         elif item_info["type"] == "Frame":
             data.update( { "onclick": "reload_main_div('/page/maindiv/" + str(item_info["page"]) +"/0/"+ str(item_info["subpage"]) +"')", "text_width": 80 } )
             data.update( self.format_item_string(item_info["label"], item_info["state"], button_width) )
+            if data["state"] != '':
+                data.update( { "type": "state" } )
         elif item_info["type"] == "Switch":
             data.update( { "text": self.format_string(item_info["label"], int(20*(button_width/100))), "state": item_info["state"].lower(), "text_width": 60, "state_width": 20 } )
             data.update( { "type": "switch" } )
