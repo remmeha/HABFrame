@@ -268,6 +268,7 @@ class page_handler():
             subpage = int(subpage)
         items = data[0]
         page_data = data[1]
+        print(page_data[0], self.widgets_handler.get_widget_label(page_data[0]))
         if page_data[1] != "temperature" and page_data[1] != "temp" and page_data[0].find("sensor") == -1:
             N_items_pp = self.setting_handler.get_setting("items_per_page")
             sensor_page = False
@@ -284,7 +285,6 @@ class page_handler():
             else:
                 N_items_pp = 9
         page_format = self.__get_page_data__(len(items), N_items_pp, sensor_page = sensor_page)
-        #print(page_data[0], self.widgets_handler.get_widget_label(page_data[0]))
         page_format.update( { "title": self.widgets_handler.get_widget_label(page_data[0]), "returnbutton": False, "linkback": "", "linknext": "", "showbacknext": True } )
         if handle_as_popup:
             sensor_page = False
@@ -342,14 +342,9 @@ class page_handler():
         return self.add_bottom_bar(page)
         
     def add_bottom_bar(self, page, returnbutton = False):
-        pages = self.openhab.get_pages(["b_", "c_", "d_"])
+        pages = self.openhab.get_pages(["b_", "c_", "d_", "a_"])
         for i in range(len(pages)):
-            if pages[i]["label"][0:2] == "b_":
-                pages[i]["type"] = "button"
-            elif pages[i]["label"][0:2] == "c_": 
-                pages[i]["type"] = "menuwidget"
-            else:
-                pages[i]["type"] = "popup"
+            pages[i]["type"] = self.widgets_handler.check_widget_type(pages[i]["label"])
         page_format = { "bottom": pages }
         page_format["returnbutton"] = returnbutton
         page_format["habpanel_link"] = Settings().get_setting("main", "habpanel_link")

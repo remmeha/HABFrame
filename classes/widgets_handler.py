@@ -111,8 +111,12 @@ class widgets_handler:
     def check_widget_type(self, name):
         if name[0:2] == "m_":
             return "menu_button"
-        if name[0:2] in ["a_", "c_", "d_"]:
+        if name[0:2] in ["a_", "d_"]:
             return "menu_popup"
+        if name[0:2] in ["c_"]:
+            return "menuwidget"
+        if name[0:2] in ["b_"]:
+            return "button"
         if name[0:2] == "s_":
             info = self.get_widget_info(name)
             return "widget_"+str(info["rows"])
@@ -127,6 +131,8 @@ class widgets_handler:
             name = name[name.find("[")+1:name.find("]")]
             return name
         for n in [ "m_", "a_", "b_", "c_", "d_"]:
+            if name.find("/ " + n) != -1:
+                return name[name.find("/ "+n)+4:]
             if name.find(n) != -1:
                 return name[name.find(n)+2:]
         i = self.get_widget_info(name)

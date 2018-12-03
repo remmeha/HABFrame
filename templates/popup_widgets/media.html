@@ -1,14 +1,17 @@
 <!-- widget
     Name=media/
+    Title=Media/
 -->
 
 <div class="xxxwide high">
 <table class="text_center fixed xxxwide smallfont right_auto left_auto high">
+    {% if not data["menuwidget"] %}
     <tr style="height: 5%;">
         <td class="largefont">
             Media
         </td>
     </tr>
+    {% endif %}
     <tr style="height: 95%;">
         <td class="largefont">
         <table class="text_center fixed xxxwide smallfont right_auto left_auto high">
@@ -119,9 +122,11 @@
                     <td>
                         <table style="width: 90%; margin-top: 10px; high" class="largefont left_5">
                             <tr class="high">
+                                {% if not data["menuwidget"] %}
                                 <td style="width:40%;">
                                     <button class="general dimmed submenu smallfont" style="margin: auto;"	onclick="closepopup()">Close</button>
                                 </td>
+                                {% endif %}
                                 <td style="width:60%;">
                                     <button class="general dimmed submenu smallfont" style="margin: auto;"	onclick="closepopup();item_action('{{ data['stop_media']['type'] }}', '{{ data['stop_media']['id'] }}');">
                                         Turn all off</button>
