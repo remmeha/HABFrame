@@ -99,7 +99,8 @@ class widgets_handler:
             try:
                 a = __import__(w_info["name"] + "_widget")
                 self.imported_widget_classes[w_info["name"]] = getattr(a, w_info["name"] + "_widget")()
-            except:
+            except Exception as e:
+                self.logging.warn("Could not create widget %s" %str(e), location=self.name)
                 self.logging.warn("Could not create widget %s" %str(w_info["name"]), location=self.name)
                 self.logging.warn("Importing normal widget", location=self.name)
                 a = __import__("widget")
