@@ -4,3 +4,5 @@
 data/main_db.pckl
 settings.xml
 *.log*
+templates/popup_widgets/*
+classes/widgets/*
