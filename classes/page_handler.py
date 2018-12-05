@@ -89,11 +89,22 @@ class page_handler():
             if not "reload" in pagelist and not "screensaver" in pagelist:
                 self.state_handler.toggle_screen(state = True)
                 self.state_handler.refresh_screensaver_subpage()
-            widget, title = self.widgets_handler.create_mainpage_popup(subpage, subpage, True)
+            widget, title = self.widgets_handler.create_mainpage_popup(subpage, lowerpage[0], True)
             page_format = {"title": title }
             page = render_template("subpage_widget.html", data = page_format)
             page = page.replace("[[WIDGET]]", widget)
-            page = self.add_bottom_bar(page )
+            if (str(lowerpage) != "0" and str(lowerpage)[0:2] != "m_") and subpage not in ["none", "items_left", "items_right"]:
+                d = self.openhab.get_items(subpage)
+                pos = 0
+                for i in range(len(d[0])):
+                    b = d[0][i]
+                    if b["type"] == "Frame" and b["label"] == lowerpage[0]:
+                        pos = i
+                N_items_pp, sensor_page = self._getNitemsPP(d[1], False)
+                rb = "%s/%d" %(subpage, int(pos/N_items_pp))
+            else:
+                rb = False
+            page = self.add_bottom_bar(page, rb)
             if widget == "widget not in sitemap":
                 return "widget not in sitemap"
             else:
@@ -205,7 +216,16 @@ class page_handler():
                     data[-1]["label"] = data[-1]["state"]
                 item += 1
                 data[-1]["fontsize"] = self.determine_text_size(data[-1]["label"], max_len = 13, start_font = "xlargefont")
-            elif itemtype == "menu_popup":  ##this is a menu button
+            elif itemtype == "widget_subpage":  ##this is a menu button
+                itemdata[item].update( { "onclick": "reload_main_div('/page/menuwidget/"+name+"/0/"+itemdata[item]["label"]+"')" } )
+                data.append(itemdata[item])
+                data[-1]["group"] = "menu_popup"
+                data[-1]["label"] = self.widgets_handler.get_widget_label(itemdata[item]["label"])
+                if data[-1]["state"] != "":
+                    data[-1]["label"] = data[-1]["state"]
+                item += 1
+                data[-1]["fontsize"] = self.determine_text_size(data[-1]["label"], max_len = 13, start_font = "xlargefont")
+            elif itemtype == "menu_popup" or itemtype == "widget_popup":  ##this is a menu button
                 itemdata[item].update( { "onclick": "frontpage_action('"+name+"', '"+itemdata[item]["label"]+"')" } )
                 data.append(itemdata[item])
                 data[-1]["group"] = "menu_popup"
@@ -268,22 +288,8 @@ class page_handler():
             subpage = int(subpage)
         items = data[0]
         page_data = data[1]
-        print(page_data[0], self.widgets_handler.get_widget_label(page_data[0]))
-        if page_data[1] != "temperature" and page_data[1] != "temp" and page_data[0].find("sensor") == -1:
-            N_items_pp = self.setting_handler.get_setting("items_per_page")
-            sensor_page = False
-        else:
-            N_items_pp = self.setting_handler.get_setting("sensors_per_page")
-            if N_items_pp == 12:
-                sensor_page = False
-            else:
-                sensor_page = True
-        if handle_as_popup:
-            N_items_pp = self.setting_handler.get_setting("items_per_page")
-            if int(N_items_pp) < 9:
-                N_items_pp = 6
-            else:
-                N_items_pp = 9
+        #print(page_data[0], self.widgets_handler.get_widget_label(page_data[0]))
+        N_items_pp, sensor_page = self._getNitemsPP(page_data, handle_as_popup)
         page_format = self.__get_page_data__(len(items), N_items_pp, sensor_page = sensor_page)
         page_format.update( { "title": self.widgets_handler.get_widget_label(page_data[0]), "returnbutton": False, "linkback": "", "linknext": "", "showbacknext": True } )
         if handle_as_popup:
@@ -342,7 +348,7 @@ class page_handler():
         return self.add_bottom_bar(page)
         
     def add_bottom_bar(self, page, returnbutton = False):
-        pages = self.openhab.get_pages(["b_", "c_", "d_", "a_"])
+        pages = self.openhab.get_pages(["m_", "a_", "b_", "c_"])
         for i in range(len(pages)):
             pages[i]["type"] = self.widgets_handler.check_widget_type(pages[i]["label"])
         page_format = { "bottom": pages }
@@ -380,8 +386,12 @@ class page_handler():
         data.update( { "onclick": "item_action('"+item_info["type"]+"', '"+item_info["id"]+"')" } )
         
         itemtype = self.widgets_handler.check_widget_type(item_info["label"])
-        if item_info["type"] == "Frame" and (itemtype == "menu_popup" or itemtype[0:6] == "widget"):
+        if item_info["type"] == "Frame" and (itemtype != "widget_subpage") and (itemtype == "widget_popup" or itemtype[0:6] == "widget"):
             data.update( { "onclick": "frontpage_action('"+str(item_info["page"])+"', '"+item_info["label"]+"')" } )
+            data["text"] = self.widgets_handler.get_widget_label(item_info["name"])
+            data["text_width"] = 80
+        elif item_info["type"] == "Frame" and (itemtype == "widget_subpage"):
+            data.update( { "onclick": "reload_main_div('/page/menuwidget/" + str(item_info["page"]) +"/0/"+ str(item_info["subpage"]) +"')" } )
             data["text"] = self.widgets_handler.get_widget_label(item_info["name"])
             data["text_width"] = 80
         elif item_info["type"] == "Frame":
@@ -471,4 +481,21 @@ class page_handler():
                 return "xlargefont"
             else:
                 return "smallfont"
-			
+	
+    def _getNitemsPP(self, page_data, handle_as_popup):
+        if page_data[1] != "temperature" and page_data[1] != "temp" and page_data[0].find("sensor") == -1:
+            N_items_pp = self.setting_handler.get_setting("items_per_page")
+            sensor_page = False
+        else:
+            N_items_pp = self.setting_handler.get_setting("sensors_per_page")
+            if N_items_pp == 12:
+                sensor_page = False
+            else:
+                sensor_page = True
+        if handle_as_popup:
+            N_items_pp = self.setting_handler.get_setting("items_per_page")
+            if int(N_items_pp) < 9:
+                N_items_pp = 6
+            else:
+                N_items_pp = 9
+        return N_items_pp, sensor_page	

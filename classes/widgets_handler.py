@@ -48,7 +48,11 @@ class widgets_handler:
         
     
     def create_mainpage_popup(self, page, subpage, menuwidget = False):
-        data = self.openhab.get_items(page, subpage)
+        if page == "none":
+            ##in case the widget is on the main page
+            data = self.openhab.get_items(subpage, page)
+        else:
+            data = self.openhab.get_items(page, subpage)
         item_data = self.render_item_data_for_widget(data[0])
         if len(item_data) == 0:
             #return "widget not in sitemap"
@@ -112,12 +116,12 @@ class widgets_handler:
     def check_widget_type(self, name):
         if name[0:2] == "m_":
             return "menu_button"
-        if name[0:2] in ["a_", "d_"]:
+        if name[0:2] in ["a_"]:
             return "menu_popup"
-        if name[0:2] in ["c_"]:
-            return "menuwidget"
         if name[0:2] in ["b_"]:
-            return "button"
+            return "widget_popup"
+        if name[0:2] in ["c_"]:
+            return "widget_subpage"
         if name[0:2] == "s_":
             info = self.get_widget_info(name)
             return "widget_"+str(info["rows"])

@@ -13,12 +13,12 @@
                 <img src="{{ url_for('static', filename='pictures/black.png') }}" alt="" height="29" width="29"></button></td>-->
             {% endif %} 
             {% for b in data["bottom"] %}
-                {% if b["type"] == "button" %}
+                {% if b["type"] == "menu_button" %}
                     <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/maindiv/{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
-                {% elif b["type"] == "menuwidget" %}
-                    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/menuwidget/{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
+                {% elif b["type"] == "widget_subpage" %}
+                    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="reload_main_div('/page/menuwidget/none/0/{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
                 {% else %}
-                    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="frontpage_action('{{ b['label'] }}', '{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
+                    <td><button class="noborder dimmed" style="width:65px;height:65px; z-index: -1;" onclick="frontpage_action('none', '{{ b['label'] }}')"><img src="{{ b['icon'] }}" alt="" height="29" width="29"></button></td>
                 {% endif %}
             {% endfor %}
         </tr>
