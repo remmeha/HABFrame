@@ -38,6 +38,12 @@ function reload_main_div(url) {
         xmlHttp5 = new XMLHttpRequest();
         xmlHttp5.open( "GET", url, false );
         xmlHttp5.send( null );
+        if (xmlHttp5.responseText == "gotomain") {  // start photoframe
+            var xmlHttp5 = null;
+            xmlHttp5 = new XMLHttpRequest();
+            xmlHttp5.open( "GET", "page/maindiv", false );
+            xmlHttp5.send( null );
+        }
         document.getElementById("placeholder_main").innerHTML = xmlHttp5.responseText;
         autoSizeText();
         

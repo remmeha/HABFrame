@@ -89,7 +89,11 @@ class page_handler():
             if not "reload" in pagelist and not "screensaver" in pagelist:
                 self.state_handler.toggle_screen(state = True)
                 self.state_handler.refresh_screensaver_subpage()
-            widget, title = self.widgets_handler.create_mainpage_popup(subpage, lowerpage[0], True)
+            try:
+                widget, title = self.widgets_handler.create_mainpage_popup(subpage, lowerpage[0], True)
+            except:
+                widget = "gotomain"
+                title = "none"
             page_format = {"title": title }
             page = render_template("subpage_widget.html", data = page_format)
             page = page.replace("[[WIDGET]]", widget)
@@ -107,6 +111,8 @@ class page_handler():
             page = self.add_bottom_bar(page, rb)
             if widget == "widget not in sitemap":
                 return "widget not in sitemap"
+            elif widget == "gotomain":
+                return widget
             else:
                 return page
         elif pagename == "popup": ##this is a popup widget

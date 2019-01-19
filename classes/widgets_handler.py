@@ -57,7 +57,7 @@ class widgets_handler:
         if len(item_data) == 0:
             #return "widget not in sitemap"
             self.logging.error("Widget is not in sitemap", location=self.name)
-            er = self.render_widget_error("cannot find widget in sitemap", subpage)  
+            er = self.render_widget_error("widget not in sitemap", subpage)  
             return render_template("popups/error.html", data = { "error": str(er) })
         info = self.get_widget_info(subpage, main_page = page)
         try:

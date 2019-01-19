@@ -24,8 +24,10 @@ function frontpage_action_load(update = "true") {
     if (xmlHttp4.responseText.search("none_none") == -1 && !(cur_state != "block" && update == "true")) {
         document.getElementById("message_popup").style.display = 'block'; 
         if (xmlHttp4.responseText.search("widget not in sitemap") == -1) {
+            console.log("=====reloaded widget =====");
             document.getElementById("message_popup").innerHTML = xmlHttp4.responseText;
         } else {
+            console.log("=====widget not in sitemap=====") ;
             closepopup();
             update = "false";
         }
