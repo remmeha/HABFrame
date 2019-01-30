@@ -20,7 +20,7 @@
                     <span class="mediumfont"><strong>{{ data["now_condition"]["state"] }}</strong></span
                 </td>
             </tr>
-            {% if data["alerts"]["state"] != "No alerts" %}
+            {% if data["alerts"]["state"].lower() != "no alerts" %}
             <tr style="height: 40%;">
                 <td style="width: 100%;" class="xsmallfont wrap" colspan="2"> 
                 Alert:<br>
