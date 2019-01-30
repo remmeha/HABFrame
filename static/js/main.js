@@ -43,6 +43,7 @@ function reload_main_div(url) {
             xmlHttp5 = new XMLHttpRequest();
             xmlHttp5.open( "GET", "page/maindiv", false );
             xmlHttp5.send( null );
+            url = "page/maindiv";
         }
         document.getElementById("placeholder_main").innerHTML = xmlHttp5.responseText;
         autoSizeText();
