@@ -9,13 +9,13 @@
 	<td style="width: 55%;" class="xsmallfont"> 
 		<table class="xsmallfont fixed"><tr>
 			<td>Condition:<br>Humidity:<br>Wind:<br>Pressure:<br>
-            {% if data["alerts"]["state"].lower() != "no alerts" %} <span> Alerts: </span> {% endif %} </td>
+            {% if data["alerts"]["state"].lower() != "no alerts" and data["alerts"]["state"].lower() != "-" %} <span> Alerts: </span> {% endif %} </td>
 			<td class="xsmallfont"><strong>{{ data["now_condition"]["state"] }}</strong>
 			<br>{{ data["now_humidity"]["state"] }}<br>{{ data["now_wind"]["state"] }}
 			<br>{{ data["now_pressure"]["state"] }} {% if data["now_pressure_trend"]["state"] == "-" %} (↓)
                         {% elif data["now_pressure_trend"]["state"] == "+" %} (↑) {% else %}
                         (=) {% endif %}  
-            <br>{% if data["alerts"]["state"].lower() != "no alerts" %} <span style="color: red"> Attention weather alerts! </span> {% endif %} </td>
+            <br>{% if data["alerts"]["state"].lower() != "no alerts" and data["alerts"]["state"].lower() != "-" %} <span style="color: red"> Attention weather alerts! </span> {% endif %} </td>
 		</tr></table>
 	<td style="width: 30%;">
 		<p><img src="{{ data['now_condition']['icon'] }}" width="90%" /></p></td><td style="width: 10%;">{{ data["now_temperature"]["state"] }}<br></td>
