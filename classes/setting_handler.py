@@ -46,6 +46,13 @@ class setting_handler(Singleton):
             settings_c = Settings()
             self.enable_screen_control = settings_c.get_setting("main", "enable_screen_control")
 
+            try:
+                topic = settings_c.get_setting("main", "mqtt_control_topic")
+                self.mqtt = mqtt()
+                self.mqtt.add_listener(topic, self, "received_mqtt_message")
+            except:
+                self.logging.warn("Mqtt not configured for handling settings", location="settings_handler")              
+
             if self.enable_screen_control in ["pi", "black"]:
                 pass
             elif self.enable_screen_control == "url":
@@ -160,3 +167,11 @@ class setting_handler(Singleton):
             return period[value]
         return value
         
+    def received_mqtt_message(self, topic, payload):
+        try:
+            for setting in self.settings:
+                if setting in payload:
+                    self.set_setting(setting, payload[setting])
+                    self.logging.info("Set setting via mqtt message: %s, %s" %(setting, payload[setting]), location="settings_handler")
+        except Exception as e:
+            raise Exception(e)

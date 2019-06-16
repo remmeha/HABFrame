@@ -154,11 +154,11 @@ class Logging(Singleton):
             elif level == 1:
                 return "ERROR"
             elif level == 2:
-                return "WARN"
-            elif level == 3:
                 return "EVENT"
-            elif level == 4:
+            elif level == 3:
                 return "INFO"
+            elif level == 4:
+                return "WARN"
             elif level == 5:
                 return "DEBUG"
             elif level == 6:
@@ -172,11 +172,11 @@ class Logging(Singleton):
                 return 0
             elif level.upper() == "ERROR":
                 return 1
-            elif level.upper() == "WARNING" or level.upper() == "WARN":
-                return 2
             elif level.upper() == "EVENT":
-                return 3
+                return 2
             elif level.upper() == "INFO":
+                return 3
+            elif level.upper() == "WARNING" or level.upper() == "WARN":
                 return 4
             elif level.upper() == "DEBUG":
                 return 5

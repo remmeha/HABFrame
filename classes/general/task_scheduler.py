@@ -17,7 +17,7 @@ class task_scheduler(Singleton):
             self.add_task(self.logging, "log_rotate", (time.time()+4*60*60), period=24*60*60)
             
     def check_tasks(self):
-        self.logging.write("Checking tasks, running scheduler", level=6, location="tasks")
+        self.logging.write("Checking tasks, running scheduler", level="TRACE", location="tasks")
         cur_time = time.time()
         length = len(self.scheduled_tasks)
         for h in range(length):
@@ -44,7 +44,10 @@ class task_scheduler(Singleton):
                         timestamp = datetime.datetime.fromtimestamp(task[2]).strftime('%c')
                         self.logging.write("Repeating task: " + class_name + "." + task[1] + " scheduled at " + str(timestamp), level=2, location="tasks")
                     elif task[4] != 0:
-                        task[2] = cur_time + task[4] ## add period for next time
+                        if type(task[4]) == str:
+                            task[2] = self.calculatenexttime(task[2], task[4])
+                        else:
+                            task[2] = cur_time + task[4] ## add period for next time
                         timestamp = datetime.datetime.fromtimestamp(task[2]).strftime('%c')
                         self.logging.write("Repeating task: " + class_name + "." + task[1] + " scheduled at " + str(timestamp), level=4, location="tasks")
                     else:
@@ -58,6 +61,8 @@ class task_scheduler(Singleton):
         self.scheduled_tasks.append([class_item, functionname, next_time, repeat, period])
         task = self.scheduled_tasks[-1]
         class_name = task[0].get_name()
+        if type(next_time) == str:
+            next_time = self.calculatetimestamp(next_time)
         timestamp = datetime.datetime.fromtimestamp(next_time).strftime('%c')
         self.logging.write("Added task: " + class_name + "." + task[1] + " scheduled at " + str(timestamp), level='info', location="tasks")
 
@@ -87,3 +92,38 @@ class task_scheduler(Singleton):
         self.logging.write("Deleting tasks: " + str(len(self.scheduled_tasks)) + " tasks active", level="warning", location="tasks")
         self.scheduled_tasks = []
         self.add_task(self.logging, "log_rotate", (time.time()+4*60*60), period=24*60*60)	
+
+    def calculatetimestamp(self, next_time):
+        date = datetime.datetime.strptime(next_time, "%c")
+        return int(date.strftime("%s"))
+
+    def calculatenexttime(self, now, nexttime):
+        nexttime = str(nexttime).lower()
+        date = datetime.datetime.fromtimestamp(now)
+        if "year" in nexttime:
+            nd = date + datetime.timedelta(years = int(nexttime[0:nexttime.find(" ")]))
+        if "mon" in nexttime:
+            nd = date + datetime.timedelta(months = int(nexttime[0:nexttime.find(" ")]))
+        if "week" in nexttime:
+            nd = date + datetime.timedelta(weeks = int(nexttime[0:nexttime.find(" ")]))
+        if "day" in nexttime:
+            nd = date + datetime.timedelta(days = int(nexttime[0:nexttime.find(" ")]))
+        if "hour" in nexttime:
+            nd = date + datetime.timedelta(hours = int(nexttime[0:nexttime.find(" ")]))
+        if "min" in nexttime:
+            nd = date + datetime.timedelta(minutes = int(nexttime[0:nexttime.find(" ")]))
+        return int(nd.strftime("%s"))
+
+    def getHourMinuteTomorrow(self, hour, minute, days = 1):
+        dtnow = datetime.datetime.now()
+        dt6 = None
+        # If today's hour is < 6 AM
+        if dtnow.hour < hour-1:
+            dt6 = datetime.datetime(dtnow.year, dtnow.month, dtnow.day, hour, minute, 0, 0)
+        # If today is past 6 AM, increment date by 1 day
+        else:
+            day = datetime.timedelta(days=days)
+            tomorrow = dtnow + day
+            dt6 = datetime.datetime(tomorrow.year, tomorrow.month, tomorrow.day, hour, minute, 0, 0)
+        timestamp = time.mktime(dt6.timetuple())
+        return timestamp

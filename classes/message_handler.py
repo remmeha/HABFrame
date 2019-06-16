@@ -8,6 +8,8 @@ from setting_handler import setting_handler
 import page_handler
 import time
 import datetime
+from mqtt import mqtt
+from settings import Settings
 
 PATH=os.path.dirname(os.path.abspath(__file__))
 
@@ -31,6 +33,11 @@ class message_handler(Singleton):
             self.toast_message = "none"
             self.toast_sender = "none"
             self.toast_received = 0
+            self.mqtt = mqtt()
+            settings_c = Settings()
+            self.mqtt_topics = settings_c.get_setting("messaging", "mqtt_topics").split(",")
+            for topic in self.mqtt_topics:
+                self.mqtt.add_listener(topic, self, "received_mqtt_message")
             ##send information messages on first run
             if not self.database.data["settings"]["first_run_messages_flag"]:
                 self.database.data["settings"]["first_run_messages_flag"] = True
@@ -40,7 +47,9 @@ class message_handler(Singleton):
                 self.database.data["messages"].append([time.time(), "HABframe", "welcome message", message, False])
                 self.database.save_datafile()
                 self.del_popup_flag()
-                
+
+    def get_name(self):
+        return "message_handler"               
                 
 
     def message_request(self, request, data_get):
@@ -58,10 +67,7 @@ class message_handler(Singleton):
                     subject = data_get["subject"]
                 else:
                     subject = "-"
-                self.database.data["messages"].append([time.time(), sender, subject, message, False])
-                self.database.save_datafile()
-                self.del_popup_flag()
-                self.logging.write("Received new message from "+sender+": "+message, level="info", location="messages")
+                self.new_message(sender, subject, message)
                 return ["Message received"]
             except Exception as e:
                 self.logging.error("Error in message: " +str(e), location="messages")
@@ -144,13 +150,22 @@ class message_handler(Singleton):
                 self.toast_sender = data_get["sender"].replace("@20", "/").replace("%3B", ":")
             else:
                 self.toast_sender = request[1].replace("@20", "/").replace("%3B", ":")
-            self.toast_received = time.time()
-            self.toast_db.append([self.toast_sender, self.toast_message, time.time(), False, 0])
-            self.logging.info("Received new toast message: "+self.toast_message, location="messages")	
+            self.new_toast()	
             return ["Toast received"]		
         elif request[0] == "get_toast":
             return self.create_toast(len_max = 31)
-                    
+
+    def new_message(self, sender, subject, message):
+        self.database.data["messages"].append([time.time(), sender, subject, message, False])
+        self.database.save_datafile()
+        self.del_popup_flag()
+        self.logging.write("Received new message from "+sender+": "+message, level="info", location="messages") 
+
+    def new_toast(self):
+        self.toast_received = time.time()
+        self.toast_db.append([self.toast_sender, self.toast_message, time.time(), False, 0])
+        self.logging.info("Received new toast message: "+self.toast_message, location="messages")
+                   
     def create_toast(self, len_max): 
         toast = self.get_toast_message()
         data = { "text": toast[0], "from": toast[1], "len": len(toast[0]), "max": len_max }
@@ -267,8 +282,26 @@ class message_handler(Singleton):
             message["subject"] = message["date"]
         return render_template("message.html", data = message)
 		
-		
-		
-		
-		
+    def received_mqtt_message(self, topic, payload):
+        try:
+            message = payload['message']
+            try:
+                t = payload['type']
+            except:
+                t = 'message'
+            try:
+                sender = payload['sender']
+            except:
+                sender = "unknown"
+            if t == "message":
+                subject = payload['subject']
+                self.new_message(sender, subject, message)
+            else:
+                self.toast_sender = sender
+                self.toast_message = message
+                self.new_toast()
+        except Exception as e:
+            raise Exception(e)
+        
+        
 		

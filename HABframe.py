@@ -11,6 +11,7 @@ from flask_cors import CORS
 
 PATH=os.path.dirname(os.path.abspath(__file__))
 sys.path.append(PATH + "/classes")
+sys.path.append(PATH + "/classes/general")
 sys.path.append(PATH + "/data")
 from HABframe_main import habframe_main
 from settings import Settings
