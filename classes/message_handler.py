@@ -285,10 +285,15 @@ class message_handler(Singleton):
     def received_mqtt_message(self, topic, payload):
         try:
             message = payload['message']
-            try:
-                t = payload['type']
-            except:
-                t = 'message'
+            if "message" in topic.lower():
+                t = "message"
+            elif "toast" in topic.lower():
+                t = "toast"
+            else:
+                try:
+                    t = payload['type']
+                except:
+                    t = 'message'
             try:
                 sender = payload['sender']
             except:
