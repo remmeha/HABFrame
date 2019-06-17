@@ -150,6 +150,7 @@ class message_handler(Singleton):
                 self.toast_sender = data_get["sender"].replace("@20", "/").replace("%3B", ":")
             else:
                 self.toast_sender = request[1].replace("@20", "/").replace("%3B", ":")
+            self.logging.debug("Received new toast message from http", location="messages")
             self.new_toast()	
             return ["Toast received"]		
         elif request[0] == "get_toast":

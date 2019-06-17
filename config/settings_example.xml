@@ -15,13 +15,8 @@
         <screen_off_cmd></screen_off_cmd>
         <enable_clock>1</enable_clock>
         <enable_album>0</enable_album>
+	<mqtt_control_topic>habframe/#</mqtt_control_topic>
     </main>
-    <wunderground>
-        <apikey>enter_key</apikey>
-        <updateperiod>15</updateperiod>
-        <language>EN</language>
-        <location>zmw:00000.176.71508</location>
-    </wunderground>
     <logging>
         <log>HABframe.log</log>
         <errorlog>HABframe_error.log</errorlog>
@@ -41,4 +36,12 @@
         <event_check_reload>2</event_check_reload>
         <page_reload>10</page_reload>
     </page>
+    <messaging>
+        <mqtt_topics>topic1,topic2,topicx</mqtt_topics>
+    </messaging>
+    <mqtt>
+        <server>ip-address</server>
+        <port>1883</port>
+        <timeout>60</timeout>
+    </mqtt>
 </settings>

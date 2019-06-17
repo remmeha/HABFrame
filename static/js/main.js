@@ -75,12 +75,18 @@ function reload_main_body(url) {
 }
 
 function get_widget_clock_page() {
-    var xmlHttpcheck1 = null;
-    xmlHttpcheck1 = new XMLHttpRequest();
-    xmlHttpcheck1.open( "GET", main_url.concat("page/clk_widget/"), false );
-    xmlHttpcheck1.send( null );
-    document.getElementById("widget_clock_page").innerHTML = xmlHttpcheck1.responseText;
-    if (xmlHttpcheck1.responseText == "") {
+    try {
+        var xmlHttpcheck1 = null;
+        xmlHttpcheck1 = new XMLHttpRequest();
+        xmlHttpcheck1.open( "GET", main_url.concat("page/clk_widget/"), false );
+        xmlHttpcheck1.send( null );
+        text = xmlHttpcheck1.responseText;
+    } catch(err) { 
+        console.log(err);
+        text = "";
+    }
+    document.getElementById("widget_clock_page").innerHTML = text;
+    if (text == "") {
          document.getElementById("widget_clock_page").width = "0%";
          document.getElementById("clock_page_clk").width = "100%";
     } else {
