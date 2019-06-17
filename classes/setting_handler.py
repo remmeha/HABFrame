@@ -7,6 +7,7 @@ from settings import Settings
 from singleton import Singleton
 from logger import Logging
 import urllib3
+from mqtt import mqtt
 
 PATH=os.path.dirname(os.path.abspath(__file__))
 
@@ -47,9 +48,10 @@ class setting_handler(Singleton):
             self.enable_screen_control = settings_c.get_setting("main", "enable_screen_control")
 
             try:
-                topic = settings_c.get_setting("main", "mqtt_control_topic")
+                topics = settings_c.get_setting("main", "mqtt_control_topic").split(",")
                 self.mqtt = mqtt()
-                self.mqtt.add_listener(topic, self, "received_mqtt_message")
+                for topic in topics:
+                    self.mqtt.add_listener(topic, self, "received_mqtt_message")
             except:
                 self.logging.warn("Mqtt not configured for handling settings", location="settings_handler")              
 
@@ -89,7 +91,9 @@ class setting_handler(Singleton):
                 self.logging.warn("Album and clock not enabled, turning off screen setting", location="settings_handler")
                 self.__set_setting("screen", "off")  ##in this case only the screensaver determines if the screen is turned on or off
             self.settings["main_screen_control"] = [0,0,self.enable_screen_control]
-            
+    
+    def get_name(self):
+        return self.name
             
     def setting_request(self, request):
         if request[0] == "setsetting":
@@ -169,9 +173,18 @@ class setting_handler(Singleton):
         
     def received_mqtt_message(self, topic, payload):
         try:
+            payload_setting = payload['setting']
             for setting in self.settings:
-                if setting in payload:
-                    self.set_setting(setting, payload[setting])
-                    self.logging.info("Set setting via mqtt message: %s, %s" %(setting, payload[setting]), location="settings_handler")
+                if setting == payload_setting:
+                    if "cmd" in topic.lower():
+                        self.set_setting(setting, payload[setting])
+                        self.logging.info("Set setting via mqtt message: %s, %s" %(setting, payload[setting]), location="settings_handler")
+                    elif "state" in topic.lower():
+                        val = self.get_setting(setting)
+                        topic = topic[0:topic.rfind("/")+1]+"status"
+                        self.mqtt.publish(topic, str({ 'setting': setting, 'value': val }) )
+            if payload_setting == "all":
+                topic = topic[0:topic.rfind("/")+1]+"status"
+                self.mqtt.publish(topic, str(list(self.settings.keys())) )
         except Exception as e:
             raise Exception(e)

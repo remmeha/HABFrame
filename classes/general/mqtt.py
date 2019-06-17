@@ -42,7 +42,7 @@ class mqtt(Singleton):
             for listen in self.listeners:
                 topic = listen[0][0:-1]
                 if msg.topic.find(topic) != -1:
-                    self.logging.trace("Topic match for %s at %s" %(listen[1].get_name(), listen[0]), location=self.name)
+                    self.logging.debug("Topic match for %s at %s" %(listen[1].get_name(), listen[0]), location=self.name)
                     try:
                         data = ast.literal_eval(msg.payload.decode("utf-8"))
                     except:
@@ -56,7 +56,11 @@ class mqtt(Singleton):
     def add_listener(self, topic, class_item, functionname):
         self.listeners.append([topic, class_item, functionname])
         self.client.subscribe(topic)
-        self.logging.info("Added listener for %s at %s" %(class_item.get_name(), topic), location=self.name)
+        try:
+            name = class_item.get_name()
+        except:
+            name = "unknown"
+        self.logging.info("Added listener for %s at %s" %(name, topic), location=self.name)
         
     def publish(self, topic, payload):
         self.logging.info("Publish %s, %s " %(topic, str(payload)), location=self.name)
