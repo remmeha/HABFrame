@@ -83,7 +83,7 @@ class message_handler(Singleton):
                     #found = True
                 i += 1
             n_unread = self.check_amount_unread()
-            times = datetime.datetime.fromtimestamp(float(message[0])).strftime('%a %d-%m, %H:%M')
+            times = datetime.datetime.fromtimestamp(float(show_message[1])).strftime('%a %d-%m, %H:%M')
             return self.page_handler.create_popup("message", { "id": show_message[0], "from": show_message[2], "time": times, "message": show_message[4], "subject": show_message[3], "n_unread": n_unread } , renew_screensaver = False)
         elif request[0] == "markread_popup":
             message_id = int(request[1])
