@@ -88,6 +88,7 @@ function item_action(item_type, item_name, or = "sub") {
 			document.getElementById("small_popup").style.display = 'block'; 
 			document.getElementById("small_popup").innerHTML = xmlHttp1.responseText;
 		} else if (xmlHttp1.responseText.search("none_none") == -1) {
+            console.log("Opening large popup");
 			document.getElementById("message_popup").style.display = 'block'; 
 			document.getElementById("message_popup").innerHTML = xmlHttp1.responseText;
 		}
