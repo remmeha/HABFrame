@@ -114,9 +114,11 @@ class habframe_main():
             #for line in page:
             #    return_string += line + "\n"
             return [True, page]
-        elif request["request"] == "setting":
+        elif request["request"] in ["settingsmain", "settings"]:
             page = self.setting_handler.setting_request(request["page"])
-            self.state_handler.refresh_screensaver_subpage()
+            if request["request"] in ["settingsmain"]:
+                ###resfresh screensaver when on settings page
+                self.state_handler.refresh_screensaver_subpage()
             for line in page:
                 return_string += line + "\n"
         elif request["request"] == "item":

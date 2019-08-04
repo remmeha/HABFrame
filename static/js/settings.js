@@ -1,7 +1,7 @@
 
 
 function setsetting(id) {
-	var url_request_main_sensor = main_url.concat("setting/setsetting/").concat(id);
+	var url_request_main_sensor = main_url.concat("settingsmain/setsetting/").concat(id);
 	 var xmlHttp = null;
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", url_request_main_sensor, false );
