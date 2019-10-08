@@ -134,10 +134,12 @@ class state_handler(Singleton):
             desired_screen_state = setting_screen_user
             
         ## check desired screen state for messages
+        self.logging.debug("Unread messages: %s" %(str(self.message_handler.check_unread())), location=self.name)
+        self.logging.debug("Popup flag: %s" %(str(self.message_handler.get_popup_flag())), location=self.name)
         if self.message_handler.check_unread() and not self.message_handler.get_popup_flag():
             self.message_handler.set_popup_active(True)
             self.message_handler.set_popup_flag()
-            self.logging.write("responding new message", level=2, location="item_handle")
+            self.logging.info("responding new message", location=self.name)
             desired_screen_state = "on"
             new_message = True ###turn on screen and make popup
         elif not self.check_timeout("message"):
@@ -157,6 +159,7 @@ class state_handler(Singleton):
         elif main_page == "black" and setting_screen_user == "on":
             desired_page = screensaver_page            
         
+        self.logging.debug("Show new messages: %s" %(str(new_message)), location=self.name)
         self.logging.debug("Screensaver page: %s" %(screensaver_page), location=self.name)
         self.logging.debug("Desired page: %s, desired_screen_state: %s" %(desired_page, desired_screen_state), location=self.name)
         self.logging.debug("Message timeout: %s, Subpage timeout: %s" %(self.check_timeout("message"), self.check_timeout("screensaver_subpage")), location=self.name)

@@ -91,7 +91,7 @@ class message_handler(Singleton):
             self.database.data["messages"][message_id][-1] = True
             self.database.save_datafile()
             self.popupactive = False
-            self.popupflag = False
+            self.del_popup_flag()
             return ["Marked as read"]
         elif request[0] == "markallread_popup":
             message_id = int(request[1])
@@ -159,7 +159,7 @@ class message_handler(Singleton):
     def new_message(self, sender, subject, message):
         self.database.data["messages"].append([time.time(), sender, subject, message, False])
         self.database.save_datafile()
-        self.del_popup_flag()
+        self.del_popup_flag() ##popup flag when a popup was activated
         self.logging.write("Received new message from "+sender+": "+message, level="info", location="messages") 
 
     def new_toast(self):

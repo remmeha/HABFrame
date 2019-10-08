@@ -18,7 +18,7 @@
         <tr>
             <td style="width: 50%;">
                 <table class="xsmallfont left_auto right_auto high xxxwide">
-                <tr style="height: 55%;"><td style="width: 100%;">
+                <tr style="height: 50%;"><td style="width: 100%;">
                     <table class="xsmallfont left_auto right_auto high xxxwide">
                     <tr><td style="width: 100%;">
                         
@@ -32,7 +32,7 @@
                             </tr>
                             <tr>	
                                 <td style="width: 30%;" class="xsmallfont" rowspan="3"> 
-                                    <p><img src="{{ data['image_url']['state'] }}" style="max-width:90%; max-height: 120px;" /></p>
+                                    <p><img src="{{ data['image_url']['state'] }}" style="max-width:90%; max-height: 200px;" /></p>
                                 </td>
                                 {% if data['title']['state_length'] < 18 %}
                                 <td style="width: 70%;" class="mediumfont"> 
@@ -100,7 +100,39 @@
                     </td>
                     </tr></table>
                 </td></tr>
-                <tr style="height: 25%;">
+                
+{% if data['media_extrawidget_1_title']['state'] != "None" or data['media_extrawidget_2_title']['state'] != "None" %}                
+        <tr style="height:25%;">
+                <td><table class="xsmallfont left_auto right_auto high xxxwide"><tr>
+                {% for i in range(1,3) %}
+                {% if data['media_extrawidget_'+ i|string + '_title']['state'] != "None" %}
+                
+                    <td style="width:50%;">
+                    <button class="general_nob xxsmallfont xxxwide" onclick="item_action(&#39;Slider&#39;, &#39;Main_media_volume__items_left__none__3&#39;, &#39;main&#39;)">
+                        <table style="height:50%;width:100%;"><tr>
+                            <td rowspan="2" style="width:15%; padding-top:1%;"><img src="/item/icon/soundvolume-50.png" alt="" width="90%"/></td>
+                            <td class="small" style="width:35%;">
+                            {{data['media_extrawidget_1_title']['state']}}
+                            </td></tr>
+                            <tr><td class="largefont">
+                            50%
+                            </td></tr>
+                        </table>
+                    </button>
+                    </td>
+                {% else %}
+                    <td style="width:50%;">&nbsp;
+                    </td>
+                {% endif %}
+                {% endfor %} 
+                </tr></table></td>  
+        </tr>
+{% endif %}
+                
+                
+                
+                
+                <tr style="height: 10%;">
                     <td>
                     <table class="xsmallfont left_auto right_auto high xxxwide">
                     <tr style="height: 100%;">
@@ -118,7 +150,7 @@
                     </table>
                     </td>
                 </td></tr>
-                <tr style="height: 20%;">
+                <tr style="height: 15%;">
                     <td>
                         <table style="width: 90%; margin-top: 10px; high" class="largefont left_5">
                             <tr class="high">
@@ -140,9 +172,9 @@
             </td>
             <td style="width: 50%;">
                 <table class="xsmallfont left_auto right_auto high wide">
-                    {% for i in range(1,5) %}
-                        <tr style="height: 25%;"><td>
-                        {% if data['media_selector_'+i|string]['state'] != "None" %}
+                    {% for i in range(1,6) %}
+                        <tr style="height: 20%;"><td>
+                        {% if data['media_selector_'+i|string + '_title']['state'] != "None" %}
                         <button style="height:80%;width:100%;" class="submenu general mediumfont" onclick="item_action('{{ data['media_selector_'+i|string]['type'] }}', '{{ data['media_selector_'+i|string]['id'] }}')">
                         <table id="item_action_{{ data['media_selector_'+i|string]['id'] }}" style="height:90%;width:100%;" class="lights fixed center">
                             <tr>

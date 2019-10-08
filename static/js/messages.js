@@ -39,7 +39,7 @@ function closeallmessages(id) {
     xmlHttp2 = new XMLHttpRequest();
     xmlHttp2.open( "GET", url1, false );
     xmlHttp2.send( null );
-    show_message_page('0')
+    //show_message_page('0')
 }
 
 function deletemessage_popup(id) {

@@ -18,14 +18,14 @@ function frontpage_action_load(update = "true") {
     xmlHttp4.open( "GET", url, false );
     xmlHttp4.send( null );
     //document.getElementById("setsetting_".concat(id)).innerHTML = "yes";
-    var cur_state = document.getElementById("message_popup").style.display
+    var cur_state = document.getElementById("widget_popup").style.display
     
     console.log("=====reloading widget=====");
     if (xmlHttp4.responseText.search("none_none") == -1 && !(cur_state != "block" && update == "true")) {
-        document.getElementById("message_popup").style.display = 'block'; 
+        document.getElementById("widget_popup").style.display = 'block'; 
         if (xmlHttp4.responseText.search("widget not in sitemap") == -1) {
             console.log("=====reloaded widget =====");
-            document.getElementById("message_popup").innerHTML = xmlHttp4.responseText;
+            document.getElementById("widget_popup").innerHTML = xmlHttp4.responseText;
         } else {
             console.log("=====widget not in sitemap=====") ;
             closepopup();
@@ -89,8 +89,8 @@ function item_action(item_type, item_name, or = "sub") {
 			document.getElementById("small_popup").innerHTML = xmlHttp1.responseText;
 		} else if (xmlHttp1.responseText.search("none_none") == -1) {
             console.log("Opening large popup");
-			document.getElementById("message_popup").style.display = 'block'; 
-			document.getElementById("message_popup").innerHTML = xmlHttp1.responseText;
+			document.getElementById("widget_popup").style.display = 'block'; 
+			document.getElementById("widget_popup").innerHTML = "AAA"+xmlHttp1.responseText;
 		}
         
 	}
@@ -135,9 +135,11 @@ function closepopup() {
 	document.getElementById("small_popup").style.display = 'none';
 	document.getElementById("message_popup").style.display = 'none'; 
 	document.getElementById("large_popup").style.display = 'none'; 
+	document.getElementById("widget_popup").style.display = 'none'; 
     document.getElementById("large_popup").innerHTML = "";
     document.getElementById("small_popup").innerHTML = "";
     document.getElementById("message_popup").innerHTML = "";
+    document.getElementById("widget_popup").innerHTML = "";
 }
 
 function closesmallpopup() {

@@ -25,6 +25,7 @@ html {
 .absleft_10 {  position: absolute;  left: 10%;}
 .absleftclk {  position: absolute;  left: 0%;}
 .right {  position: absolute;  right: 3%;  }
+.right_23 {  position: absolute;  right: 23%;  }
 .right_7 {  position: absolute;  right: 7%;  }
 .right_6 {  position: absolute;  right: 6%;  }
 .right_5 {  position: absolute;  right: 5%;  }
@@ -40,8 +41,8 @@ html {
 .wide { width: 90%; }
 .wide_ { width: 86%; }
 .wide__ { width: 80%; }
-.xxmedium { width: 65%; }
-.xmedium { width: 55%; }
+.xxmedium { width: 66%; }
+.xmedium { width: 54%; }
 .medium { width: 46%;  }
 .xsmall { width: 31%; }
 .small { width: 22%; }
@@ -115,6 +116,7 @@ html {
 .xxsmallfont {  font-size: 1.3vw; }
 .xsmallfont {  font-size: 1.5vw}
 .smallfont {  font-size: 1.8vw;}
+.xmediumfont {  font-size: 2.0vw;}
 .mediumfont {  font-size: 2.5vw;  letter-spacing: 1px;  font-family: "HelveticaNeue-Light", sans-serif;}
 .largefont {  font-size: 3.2vw;  letter-spacing: 1px;  font-family: "HelveticaNeue-Light", sans-serif;}
 .xlargefont {  font-size: 3.7vw;  letter-spacing: 3px;  font-family: "HelveticaNeue-Light", sans-serif;}
