@@ -108,9 +108,9 @@
                 {% if data['media_extrawidget_'+ i|string + '_title']['state'] != "None" %}
                 
                     <td style="width:50%;">
-                    <button class="general_nob xxsmallfont xxxwide" onclick="item_action(&#39;Slider&#39;, &#39;Main_media_volume__items_left__none__3&#39;, &#39;main&#39;)">
+                    <button class="general_nob xxsmallfont xxxwide" onclick="item_action('{{ data['media_extrawidget_'+i|string]['type'] }}', '{{ data['media_extrawidget_'+i|string]['id'] }}')">
                         <table style="height:50%;width:100%;"><tr>
-                            <td rowspan="2" style="width:15%; padding-top:1%;"><img src="/item/icon/soundvolume-50.png" alt="" width="90%"/></td>
+                            <td rowspan="2" style="width:15%; padding-top:1%;"><img src="{{ data['media_extrawidget_'+i|string]['icon'] }}" alt="" width="90%"/></td>
                             <td class="small" style="width:35%;">
                             {{data['media_extrawidget_1_title']['state']}}
                             </td></tr>
