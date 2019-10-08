@@ -74,6 +74,8 @@ class item_handler():
                 s = item_info["state"][0:-1]
             elif item_info["state"][-1:] == "C":
                 s = item_info["state"][0:-2]
+            else:
+                s = item_info["state"]
             if item_info["type"] == "Selection":
                 mappings = self.openhab.get_mappings(item)
                 return self.page_handler.create_popup("selection", data = { "id": item, "mappings": mappings, "n": len(mappings) })
