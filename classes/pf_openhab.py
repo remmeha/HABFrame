@@ -225,9 +225,11 @@ class pf_openhab(Singleton):
                 item_data["type"] = "Switch_single"
                 item_state = key["mappings"][0]["label"]
             for mapp in key["mappings"]:
-                if mapp["command"] == item_data["state"]:
+                if mapp["command"].lower() == item_data["state"].lower():
                     ## mappings are like [ displayed state, actual state ]
                     item_state = mapp["label"]
+                elif mapp["label"].lower() == item_data["state"].lower():
+                    item_state = mapp['label']   ##sometimes a state is 0 ==> OFF, which is not mapped correctly with Off or 0
             try:
                 ##why is this?????
                 #print(item_state)
