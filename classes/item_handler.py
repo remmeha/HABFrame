@@ -50,7 +50,9 @@ class item_handler():
         ##handle a button press per type of item:
         #print(item)
         if action == "set":
-            if item_info["type"] == "Switch_single":
+            if item_info == None: 
+                return "none_none"
+            elif item_info["type"] == "Switch_single":
                 item_info = self.openhab.set_state(item, item_info["mappings"][0]["command"])
             elif item_info["type"] == "Switch":
                 if item_info["state"] == "ON":
@@ -61,7 +63,9 @@ class item_handler():
         elif action == "cmd":
             command = request[2]
             item_info = self.openhab.set_state(item, command)
-            if item_info["subpage"][0:2] in ["a_", "c_", "d_", "s_"]:
+            if item_info == None:
+                return "reload_widget_popup"
+            elif item_info["subpage"][0:2] in ["a_", "c_", "d_", "s_"]:
                 return "reload_widget_popup"
             else:
                 return self.page_handler.create_item_button(item_info, header = False)
