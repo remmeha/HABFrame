@@ -13,7 +13,12 @@
     </tr>
     <tr>	
         <td style="width: 30%;" class="xsmallfont" rowspan="3"> 
-            <p><img src="{{ data['image_url']['state'] }}" style="max-width:90%; max-height: 180px;" /></p>
+             
+            {% if data['image_url']['state'] == "none" %}
+                <p><img src="{{ data['image']['state'] }}" style="max-width:90%; max-height: 180px;" /></p>
+            {% else %}
+                <p><img src="{{ data['image_url']['state'] }}" style="max-width:90%; max-height: 180px;" /></p>
+            {% endif %}
         </td>
         {% if data['title']['state_length'] < 18 %}
         <td style="width: 70%;" class="mediumfont"> 
